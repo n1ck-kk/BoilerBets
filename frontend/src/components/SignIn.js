@@ -32,7 +32,7 @@ class SignIn extends Component {
     /* Here we need to check the username with backend and then log the user in, redirect to dashboard */
     handelSubmit =(e)=>{
         e.preventDefault();
-        this.props.history.push('/');
+        this.props.history.push('/Dashboard');
     }
 
     render() {

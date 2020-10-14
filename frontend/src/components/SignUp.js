@@ -29,7 +29,7 @@ class SignUp extends Component {
     /* Also perform any error checking (duplicate values, whatever) */
     handelSubmit =(e)=>{
         e.preventDefault();
-        this.props.history.push('/');
+        this.props.history.push("/Dashboard");
     }
 
     render() {
