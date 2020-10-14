@@ -1,0 +1,6 @@
+server\main.class
+server\User\UserSerializer.class
+server\User\UserDeserializer.class
+server\User\UserController.class
+server\User\Email.class
+server\User\User.class
