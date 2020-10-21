@@ -7,7 +7,7 @@ public class User{
 	public String password;
 	public String name;
 	public String email;
-	public String phoneNumber;
+
 	// public String photo;
 	// public String bio;
 	// public String likedDrinks;
@@ -27,7 +27,7 @@ public class User{
 		this.password = null;
 		this.name = null;
 		this.email = null;
-		this.phoneNumber = null;
+	
 		// this.photo = null;
 		// this.bio = null;
 		// this.likedDrinks = null;
@@ -42,14 +42,14 @@ public class User{
 	}
 
 
-	public User(int userId, String userName, String password, String name, String email, String phoneNumber)//, String photo, String bio, String likedDrinks, String dislikedDrinks, String favoriteDrink, String publishedDrinks, String postHistory, String friendsList, String dateCreated, String lastLogin, int darkMode)
+	public User(int userId, String userName, String password, String name, String email)//, String photo, String bio, String likedDrinks, String dislikedDrinks, String favoriteDrink, String publishedDrinks, String postHistory, String friendsList, String dateCreated, String lastLogin, int darkMode)
 	{
 		this.userId = userId;
 		this.userName = userName;
 		this.password = password;
 		this.name = name;
 		this.email = email;
-		this.phoneNumber = phoneNumber;
+
 		// this.photo = photo;
 		// this.bio = bio;
 		// this.likedDrinks = likedDrinks;

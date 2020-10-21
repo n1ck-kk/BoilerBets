@@ -26,18 +26,7 @@ public class UserSerializer extends StdSerializer<User> {
 		gen.writeStringField("password", value.password);
 		gen.writeStringField("name", value.name);
 		gen.writeStringField("email", value.password);
-		gen.writeStringField("phoneNumber", value.phoneNumber);
-		// gen.writeStringField("photo", value.photo);
-		// gen.writeStringField("bio", value.bio);
-		// gen.writeStringField("likedDrinks", value.likedDrinks);
-		// gen.writeStringField("dislikedDrinks", value.dislikedDrinks);
-		// gen.writeStringField("favoriteDrink", value.favoriteDrink);
-		// gen.writeStringField("publishedDrinks", value.publishedDrinks);
-		// gen.writeStringField("postHistory", value.postHistory);
-		// gen.writeStringField("friendsList", value.friendsList);
-		// gen.writeStringField("dateCreated", value.dateCreated);
-		// gen.writeStringField("lastLogin", value.lastLogin);
-		// gen.writeNumberField("darkMode", value.darkMode);
+		
 		gen.writeEndObject();
 	}
 
