@@ -181,7 +181,7 @@ public class UserSQL {
 			String query = "insert into "+ this.database+".users "+ 
 				"(username, password, name, email) "+
 				"values "+ 
-				"(?, ?, ?, ?, ?)";
+				"(?, ?, ?, ?)";
 			System.out.println(query);
 			psmt = conn.prepareStatement(query);
 			psmt.setString(1, username);

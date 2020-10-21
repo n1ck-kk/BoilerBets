@@ -25,61 +25,10 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 @RequestMapping(path="/user")
 public class UserController {
 	//make private and called in insert user or somewhere after testing
-	byte[] g_salt = new byte[16];
+	
 	int count = 0;
 
-	//@GetMapping("/hashPassword/{password}/{salty}")
-	public String hashPass(String password, byte[] salt2, int flag)
-		throws IOException{
-		//flag = 1, insert User
-		//flag = 0, login user
-		MessageDigest ms;
-		StringBuilder stringBuilder = new StringBuilder();
-		String out = "";
-		try{
-			ms = MessageDigest.getInstance("SHA-256");
-
-			SecureRandom r = new SecureRandom();
-			byte[] salt = new byte[16];
-			r.nextBytes(salt);
-
-		
-			//System.out.println("Salt array "+Arrays.toString(salt));
-			//System.out.println("Salt concat array: "+Arrays.toString(salt)+"thisistestforconcatingation");
-			String append = "";
-			if(flag==1){//insert
-				System.out.println("Salt is empty!");
-				append = Arrays.toString(salt);
-			}else{//login
-				salt = salt2;//.getBytes();
-				System.out.println("salt from parm "+new String(salt));
-				append = new String(salt);
-			}
-			//System.out.println("Salt3: "+salt+" count: "+count);
-			ms.update(append.getBytes());
-
-			byte[] hashedPass = ms.digest(password.getBytes(StandardCharsets.UTF_8));
-
-			
-			for (byte b : hashedPass){
-				stringBuilder.append(String.format("%02x", b));
-			}
-			System.out.println("Final salt: "+new String(salt));
-			//String saltString = new String(salt);
-
-			out = append+"."+stringBuilder.toString();
-			//salt = null;
-			//salt2 = null;
-			//hashedPass = null;
-		}catch(Exception e){
-			e.printStackTrace();
-			return "ERROr";
-		}
-
-		return out;
-	}
-
-	@PostMapping("/login")
+		@PostMapping("/login")
 	public String login(@RequestBody String userName)
 		throws JsonParseException, JsonMappingException, IOException {
 		
@@ -170,11 +119,9 @@ public class UserController {
 		sm.addDeserializer(User.class, new UserDeserializer());
 		om.registerModule(sm);
 		User u = om.readValue(username, User.class);
-		//System.out.print(u.toString());
-		String testHashedPass = hashPass(u.password, null, 1);
 
 		UserSQL users = new UserSQL();
-		String insert  = users.insertUser(u.userName, testHashedPass, u.name, u.email);	
+		String insert  = users.insertUser(u.userName, u.password, u.name, u.email);	
 
 	    return insert;
     }
