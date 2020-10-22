@@ -5,6 +5,7 @@ import Popup from 'react-popup';
 import SignIn from './components/SignIn.js'
 import SignUp from './components/SignUp.js'
 import Dashboard from './components/Dashboard.js';
+import TeamStats from './components/TeamStats.js'
 import { render } from '@testing-library/react';
 
 class App extends Component {
@@ -25,6 +26,7 @@ class App extends Component {
             <Route exact path ='/' component ={SignIn}/>
             <Route exact path ='/SignUp' component ={SignUp}/>
             <Route exact path ='/Dashboard' component ={Dashboard}/>
+            <Route exact path ='/TeamStats' component = {TeamStats}/>
           </Switch>
       </div>
       </BrowserRouter>

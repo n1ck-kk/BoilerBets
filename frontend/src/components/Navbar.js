@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import { withStyles } from '@material-ui/core/styles';
+import { DesktopWindows } from '@material-ui/icons';
 
 const styles = theme => ({
   root: {
@@ -25,6 +26,7 @@ class Navbar extends Component {
   constructor(props) {
     super(props);
     this.handleSignOut = this.handleSignOut.bind(this);
+    this.handleTeamStatsPage = this.handleTeamStatsPage.bind(this);
     this.state = {
       username: '',
       loggedIn: false
@@ -39,6 +41,9 @@ class Navbar extends Component {
     })
     this.props.history.push('/');
   }
+  handleTeamStatsPage() {
+    window.location.replace('/TeamStats');
+  }
 
   render() {
     const { classes } = this.props;
@@ -52,7 +57,7 @@ class Navbar extends Component {
                 BoilerBets
                 </Typography>
                 <Button color="inherit">Players</Button>
-                <Button color="inherit">Teams</Button>
+                <Button color="inherit" onClick={this.handleTeamStatsPage}>Teams</Button>
                 <Button color="inherit">Available Bets</Button>
                 <Button color="inherit" onClick={this.handleSignOut}>Sign Out</Button>
             </Toolbar>
