@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
+import { withRouter } from 'react-router-dom';
 import {Redirect} from 'react-router-dom';
 import axios from 'axios';
+import { config } from '../config/config.js';
 import 'materialize-css';
 import '@material-ui/core';
 import { Person, Book, Email, PersonOutline } from '@material-ui/icons';
@@ -10,6 +12,7 @@ class SignUp extends Component {
 
     constructor(props) {
         super(props);
+        this.handelSubmit = this.handelSubmit.bind(this);
         this.state = {
             username: '',
             password: '',
@@ -27,9 +30,38 @@ class SignUp extends Component {
 
     /* Here we need to insert the new fields into the database, log the user in, and redirect to dashboard*/
     /* Also perform any error checking (duplicate values, whatever) */
-    handelSubmit =(e)=>{
+    async handelSubmit (e) {
         e.preventDefault();
-        this.props.history.push("/Dashboard");
+        await fetch(config.url.API_URL + '/user/', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                username: this.state.username,
+                password: this.state.password,
+                email: this.state.email,
+                name: this.state.name
+            })
+        }).then(res => res.json()).then((data) => {
+            this.setState({response: data})
+        }).catch(console.log);
+
+        let m = this.state.response.status;
+        if (m === "ok") {
+            console.log("Successful signup/signin");
+            this.setState({loggedIn: true, user: this.state.username});
+            this.props.history.push({
+                pathname: '/Dashboard',
+                state: {
+                    username: this.state.username,
+                    loggedIn: this.state.loggedIn
+                }
+            });
+        }else{
+            console.log("Error signing up");
+        }
     }
 
     render() {
@@ -64,4 +96,4 @@ class SignUp extends Component {
     }
 }
 
-export default SignUp;
+export default withRouter(SignUp);

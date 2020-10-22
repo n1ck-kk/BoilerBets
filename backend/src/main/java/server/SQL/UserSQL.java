@@ -3,9 +3,6 @@ package server.SQL;
 import java.sql.*;
 import java.util.ArrayList;
 import server.User.User;
-// import server.Drink.Drink;
-// import server.Post.Post;
-// import server.Drink.Ingredient;
 
 public class UserSQL {
 
@@ -40,8 +37,7 @@ public class UserSQL {
 
 			while (rs.next())
 			{
-				int userId=rs.getInt("userId");
-				String userName=rs.getString("username");
+				String username=rs.getString("username");
 				String password = rs.getString("password");
 				String fullName = rs.getString("name");
 				String email = rs.getString("email");
@@ -50,7 +46,7 @@ public class UserSQL {
 				User u = new User();
 				user.add(u);
 			
-				all+=userId+"\t"+userName+"\t"+password+"\t"+fullName+"\t"+email+"\t";//+profilePhoto+"\t"+bio+"\t"+likedDrinks+"\t"+dislikedDrinks+"\t"+favoriteDrink+"\t"+publishedDrinks+"\t"+postHistory+"\t"+friendsList+"\t"+dateCreated+"\t"+lastLogin;
+				all+=username+"\t"+password+"\t"+fullName+"\t"+email+"\t";//+profilePhoto+"\t"+bio+"\t"+likedDrinks+"\t"+dislikedDrinks+"\t"+favoriteDrink+"\t"+publishedDrinks+"\t"+postHistory+"\t"+friendsList+"\t"+dateCreated+"\t"+lastLogin;
 				all+="<br>";
 			}
 			rs.close();
@@ -103,8 +99,8 @@ public class UserSQL {
 
 			while (rs.next())
 			{
-				u.userId=rs.getInt("userId");
-				u.userName=rs.getString("username");
+				//u.userId=rs.getInt("userId");
+				u.username=rs.getString("username");
 				u.password = rs.getString("password");
 				u.name = rs.getString("name");
 				u.email = rs.getString("email");
@@ -141,13 +137,13 @@ public class UserSQL {
 			String all = "User Info:<br>";
 			while (rs.next())
 			{
-				int userId=rs.getInt("userId");
-				String userName=rs.getString("username");
+				//int userId=rs.getInt("userId");
+				String username=rs.getString("username");
 				String password = rs.getString("password");
 				String fullName = rs.getString("name");
 				String email = rs.getString("email");
 	
-				User u = new User(userId, userName, password, fullName, email);
+				User u = new User(username, password, fullName, email);
 				user.add(u);
 			}
 			rs.close();
@@ -155,7 +151,7 @@ public class UserSQL {
 			conn.close();
 			
 			for (int x = 0; x < user.size(); x++){
-				System.out.println("INSQL "+user.get(x).userName);
+				System.out.println("INSQL "+user.get(x).username);
 
 			}
 			
@@ -179,15 +175,15 @@ public class UserSQL {
 			// }
 			//if unique then can insert User
 			String query = "insert into "+ this.database+".users "+ 
-				"(username, password, name, email) "+
+				"(username, password, email, name) "+
 				"values "+ 
 				"(?, ?, ?, ?)";
 			System.out.println(query);
 			psmt = conn.prepareStatement(query);
 			psmt.setString(1, username);
 			psmt.setString(2, password);
-			psmt.setString(3, name);
-			psmt.setString(4, email);
+			psmt.setString(3, email);
+			psmt.setString(4, name);
 			
 			int insertResult = psmt.executeUpdate();
 

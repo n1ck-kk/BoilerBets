@@ -30,16 +30,17 @@ public class UserController {
 
 		@PostMapping("/login")
 	public String login(@RequestBody String userName)
+		public String login(@RequestBody String username)
 		throws JsonParseException, JsonMappingException, IOException {
 		
 		ObjectMapper om = new ObjectMapper();
 		SimpleModule sm = new SimpleModule("UserDeserializer", new Version(1, 0, 0, null, null, null));
 		sm.addDeserializer(User.class, new UserDeserializer());
 		om.registerModule(sm);
-		User u = om.readValue(userName, User.class);
+		User u = om.readValue(username, User.class);
 
 		UserSQL user = new UserSQL();
-		String dbPass = user.login(u.userName, u.password);
+		String dbPass = user.login(u.username, u.password);
 		
 		if(dbPass == "")
 			return "{ \"status\" : \"Error: Login Failed.\"}";
@@ -59,9 +60,7 @@ public class UserController {
 		ArrayList<User> list = users.getAllUsers();
 		String out = "";
 		for (User user : list) {
-			out += user.userId + "\t";
-			// out += user.darkMode + "\t";
-			out += user.userName + "\t";
+			out += user.username + "\t";
 			out += user.password + "\t";
 			out += user.name + "\t";
 			out += user.email + "\t";
@@ -121,7 +120,7 @@ public class UserController {
 		User u = om.readValue(username, User.class);
 
 		UserSQL users = new UserSQL();
-		String insert  = users.insertUser(u.userName, u.password, u.name, u.email);	
+		String insert  = users.insertUser(u.username, u.password, u.name, u.email);	
 
 	    return insert;
     }

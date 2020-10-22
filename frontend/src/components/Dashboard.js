@@ -33,7 +33,7 @@ class Dashboard extends Component {
 
     /* Once we have user bets, use map() to put them into a materialize table or somethin */
     render() {
-        console.log(this.props.history);
+        console.log(this.props.location.state);
         return (
             <div className = "container">
                 <Navbar />
@@ -42,5 +42,5 @@ class Dashboard extends Component {
     }
 }
 
-withRouter(Dashboard);
-export default Dashboard;
+//withRouter(Dashboard);
+export default withRouter(Dashboard);

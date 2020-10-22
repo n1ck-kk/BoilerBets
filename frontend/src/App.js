@@ -1,6 +1,7 @@
 import './App.css';
 import React, {Component} from 'react';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import Popup from 'react-popup';
 import SignIn from './components/SignIn.js'
 import SignUp from './components/SignUp.js'
 import Dashboard from './components/Dashboard.js';
@@ -19,6 +20,7 @@ class App extends Component {
     return (
       <BrowserRouter>
       <div className="App">
+      <Popup />
           <Switch>
             <Route exact path ='/' component ={SignIn}/>
             <Route exact path ='/SignUp' component ={SignUp}/>

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
+import { withRouter } from 'react-router-dom';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
@@ -21,6 +22,24 @@ const styles = theme => ({
 
 class Navbar extends Component {
 
+  constructor(props) {
+    super(props);
+    this.handleSignOut = this.handleSignOut.bind(this);
+    this.state = {
+      username: '',
+      loggedIn: false
+    }
+  }
+
+  handleSignOut(e) {
+    e.preventDefault();
+    this.setState({
+      username: '',
+      loggedIn: false
+    })
+    this.props.history.push('/');
+  }
+
   render() {
     const { classes } = this.props;
     return (
@@ -35,6 +54,7 @@ class Navbar extends Component {
                 <Button color="inherit">Players</Button>
                 <Button color="inherit">Teams</Button>
                 <Button color="inherit">Available Bets</Button>
+                <Button color="inherit" onClick={this.handleSignOut}>Sign Out</Button>
             </Toolbar>
             </AppBar>
         </div>
@@ -42,5 +62,5 @@ class Navbar extends Component {
   }
 }
 
-
-export default withStyles(styles)(Navbar);
+//withRouter(Navbar);
+export default withRouter(withStyles(styles)(Navbar));

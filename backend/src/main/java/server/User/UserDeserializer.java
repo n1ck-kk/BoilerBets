@@ -36,7 +36,7 @@ public class UserDeserializer extends StdDeserializer<User> {
         //String[] tt = new String[10];
         //JsonNode i = node.get("ingredients");
         //System.out.println(i);
-        User u = new User(-1,
+        User u = new User(
             node.get("username").asText(),
             node.get("password").asText(),
             node.get("name").asText(),

@@ -50,7 +50,6 @@
             <artifactId>tomcat-jdbc</artifactId>
             <version>9.0.10</version>
         </dependency>
-        
       
     </dependencies>
     
@@ -84,7 +83,5 @@
         <url/>
     </scm>
     <url/>
-
-    <!-- Additional lines to be added here... -->
 
 </project>
