@@ -21,7 +21,7 @@ export default class TeamStatsCard extends React.Component{
             <div>
                 <Card style={{width: "500px"}} centered >
                     <CardContent>
-                        <Typography gutterRight>
+                        <Typography gutterright>
                             {this.props.teamName}
                         </Typography>
                     </CardContent>

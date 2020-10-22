@@ -22,14 +22,15 @@ export default class TeamCard extends React.Component{
 
         return(
             <div>
-                
-                <Card style={{width: "500px"}} centered >
-                    <CardContent>
-                        <div className="left aligned">
-                            {this.props.teamName}
-                        </div>
-                    </CardContent>
-                </Card>
+                <Link to={console.log(this.props.teamName)}>
+                    <Card style={{width: "500px"}} >
+                        <CardContent>
+                            <div className="left aligned">
+                                {this.props.teamName}
+                            </div>
+                        </CardContent>
+                    </Card>
+                </Link>
             </div>
 
         )//End return(...)

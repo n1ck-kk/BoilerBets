@@ -27,14 +27,14 @@ export default class TeamStats extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            teamList: ['Paul Miller', 'Nick Leuer']
-        }
+            teamList: []
+        };
+        this.handleGetTeamStats = this.handleGetTeamStats.bind(this);
     }
-
     /* Use axios to get team stats from db here */
     /* Current user info should be stored in this.props.history */
-    async getTeamStats() {
-
+    async componentDidMount() {
+        this.handleGetTeamStats();
     }
 
 
@@ -46,16 +46,17 @@ export default class TeamStats extends Component {
                 <Navbar />
                 <div>
                     {this.state.teamList.map((teamList, index) => {
+                        console.log(index);
                             return(<TeamCard teamName={this.state.teamList[index]} />)
                         }
                     )}
                 </div>
-                <div>
+                {/* <div>
                     {this.state.teamList.map((teamList, index) => {
                             return(<TeamStatsCard teamName={this.state.teamList[index]} />)
                         }
                     )}
-                </div>
+                </div> */}
             </div>
 
             
@@ -63,7 +64,24 @@ export default class TeamStats extends Component {
                 
         )
     }
-}
+
+    async handleGetTeamStats() {
+        console.log("HERE!!!");
+        await fetch('http://localhost:8080/team/teamStats' ,{
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            }
+        }).then(response => response.json())
+            .then(data => {
+                //console.log("setting state");
+                //console.log(Object.keys(data));
+                this.setState({teamList: Object.keys(data)});
+                //console.log(this.state.teamList);
+            }).catch(console.log("ERR")); // here's how u set variables u want to use later
+    }
+} //end default class TeamStats
 
 //withRouter(Dashboard);
 //withRouter(TeamStats);
