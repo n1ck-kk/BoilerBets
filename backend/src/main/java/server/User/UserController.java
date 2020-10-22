@@ -29,7 +29,6 @@ public class UserController {
 	int count = 0;
 
 		@PostMapping("/login")
-	public String login(@RequestBody String userName)
 		public String login(@RequestBody String username)
 		throws JsonParseException, JsonMappingException, IOException {
 		
