@@ -1,6 +1,9 @@
-server\main.class
 server\User\UserSerializer.class
-server\User\UserDeserializer.class
-server\User\UserController.class
+server\Team\TeamStats.class
 server\User\Email.class
 server\User\User.class
+server\SQL\TeamSQL.class
+server\Team\TeamController.class
+server\main.class
+server\User\UserDeserializer.class
+server\User\UserController.class

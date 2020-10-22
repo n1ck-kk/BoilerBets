@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 C:\Users\forev\Desktop\BoilerBets\backend\src\main\java\server\main.java
 C:\Users\forev\Desktop\BoilerBets\backend\src\main\java\server\User\UserController.java
 C:\Users\forev\Desktop\BoilerBets\backend\src\main\java\server\User\Email.java
@@ -5,3 +6,12 @@ C:\Users\forev\Desktop\BoilerBets\backend\src\main\java\server\SQL\UserSQL.java
 C:\Users\forev\Desktop\BoilerBets\backend\src\main\java\server\User\UserSerializer.java
 C:\Users\forev\Desktop\BoilerBets\backend\src\main\java\server\User\UserDeserializer.java
 C:\Users\forev\Desktop\BoilerBets\backend\src\main\java\server\User\User.java
+=======
+C:\Users\Nick Leuer\BoilerBets\backend\src\main\java\server\SQL\UserSQL.java
+C:\Users\Nick Leuer\BoilerBets\backend\src\main\java\server\User\User.java
+C:\Users\Nick Leuer\BoilerBets\backend\src\main\java\server\User\Email.java
+C:\Users\Nick Leuer\BoilerBets\backend\src\main\java\server\User\UserSerializer.java
+C:\Users\Nick Leuer\BoilerBets\backend\src\main\java\server\main.java
+C:\Users\Nick Leuer\BoilerBets\backend\src\main\java\server\User\UserController.java
+C:\Users\Nick Leuer\BoilerBets\backend\src\main\java\server\User\UserDeserializer.java
+>>>>>>> 5826b022927fc6cb92a42008b6cdac8280d5b400
