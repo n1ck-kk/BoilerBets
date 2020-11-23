@@ -27,6 +27,87 @@ public class TeamSQL {
 
 	}
 
+	public String getTeamID(String teamName){
+		try {
+			System.out.println(teamName);
+			psmt = conn.prepareStatement("select teamId from "+this.database+".teams where teamName = ?");
+			psmt.setString(1, teamName);
+			rs = psmt.executeQuery();
+			String teamId = "";
+			while(rs.next()){
+				teamId = rs.getString("teamId");
+			}
+			rs.close();
+			psmt.close();
+			conn.close();
+			System.out.println(teamId);
+			return teamId;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public String getTeamNameStat(String teamName) {
+		try {
+			/* Get ID */
+
+			System.out.println(teamName);
+			psmt = conn.prepareStatement("select teamId from "+this.database+".teams where teamName = ?");
+			psmt.setString(1, teamName);
+			rs = psmt.executeQuery();
+			String teamId = "";
+			while(rs.next()){
+				teamId = rs.getString("teamId");
+			}
+			System.out.println(teamId);
+
+			psmt = conn.prepareStatement("select * from "+this.database+".teamStats where teamId = ?");
+			psmt.setString(1, teamId);
+			rs = psmt.executeQuery();
+			String result = "{ ";
+			/*
+			while (rs.next()) {
+				result += "wins: " + rs.getInt("wins");
+				result += ", losses: " + rs.getInt("losses");
+				result += ", winPct: " + rs.getInt("winPct");
+				result += ", avgPoints: " + rs.getInt("avgP");
+				result += ", avgFGP: " + rs.getInt("avgFGP");
+				result += ", avg3PP: " + rs.getInt("avg3PP");
+				result += ", avgFTP: " + rs.getInt("avgFTP");
+				result += ", avgAST: " + rs.getInt("avgAST");
+				result += ", avgTO:" + rs.getInt("avgTO");
+				result += ", avgBLK: " + rs.getInt("avgBLK");
+			}
+			*/
+			while (rs.next())
+			{
+                result+= "\""+teamName+"\": {";
+				result+= "\"wins\": "+rs.getInt("wins");
+				result+= ",\"losses\": "+rs.getInt("losses");
+				result+= ",\"winPct\": "+rs.getInt("winPct");
+                result+= ",\"avgP\": "+rs.getInt("avgP");
+                result+= ",\"avgFGP\": "+rs.getInt("avgFGP");
+                result+= ",\"avg3PP\": "+rs.getInt("avg3PP");
+                result+= ",\"avgFTP\": "+rs.getInt("avgFTP");
+                result+= ",\"avgAST\": "+rs.getInt("avgAST");
+                result+= ",\"avgTO\": "+rs.getInt("avgTO");
+                result+= ",\"avgBLK\": "+rs.getInt("avgBLK");
+				result+=" }, ";
+			}
+            result = result.substring(0, result.length()-2);
+            result+=" }";
+			rs.close();
+			psmt.close();
+			conn.close();
+			System.out.println(result);
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 
 
 public String getTeamStats(){

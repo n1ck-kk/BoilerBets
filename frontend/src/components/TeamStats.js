@@ -7,30 +7,20 @@ import { makeStyles } from '@material-ui/styles';
 import '../css/SignIn.css';
 import { Grid } from '@material-ui/core';
 import TeamCard from './../TeamCard.js';
+import '../css/TeamStats.css';
 import TeamStatsCard from './../TeamStatsCard.js';
 
-
-const useStyles = makeStyles((theme) => ({
-    root: {
-      flexGrow: 1,
-    },
-    menuButton: {
-      marginRight: theme.spacing(2),
-    },
-    title: {
-      flexGrow: 1,
-    },
-  }));
 
 export default class TeamStats extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            teamList: []
+            teamList: [],
         };
         this.handleGetTeamStats = this.handleGetTeamStats.bind(this);
     }
+
     /* Use axios to get team stats from db here */
     /* Current user info should be stored in this.props.history */
     async componentDidMount() {
@@ -40,23 +30,18 @@ export default class TeamStats extends Component {
 
     /* Once we have user bets, use map() to put them into a materialize table or somethin */
     render() {
-        console.log(this.props.location.state);
+        //console.log(this.props.location.state);
+        console.log(this.state.teamList[1]);
         return (
             <div className = "container"> {/* Section that displays the navbar */}
                 <Navbar />
-                <div>
+                <div className="scrollBox">
                     {this.state.teamList.map((teamList, index) => {
                         console.log(index);
                             return(<TeamCard teamName={this.state.teamList[index]} />)
                         }
                     )}
                 </div>
-                {/* <div>
-                    {this.state.teamList.map((teamList, index) => {
-                            return(<TeamStatsCard teamName={this.state.teamList[index]} />)
-                        }
-                    )}
-                </div> */}
             </div>
 
             

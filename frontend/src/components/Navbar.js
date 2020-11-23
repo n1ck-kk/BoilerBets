@@ -27,9 +27,10 @@ class Navbar extends Component {
     super(props);
     this.handleSignOut = this.handleSignOut.bind(this);
     this.handleTeamStatsPage = this.handleTeamStatsPage.bind(this);
+    this.handlePlayersPage = this.handlePlayersPage.bind(this);
     this.state = {
-      username: '',
-      loggedIn: false
+      username: this.props.location.state.username,
+      loggedIn: this.props.location.state.loggedIn
     }
   }
 
@@ -41,8 +42,29 @@ class Navbar extends Component {
     })
     this.props.history.push('/');
   }
+
+  /* --------------------------------------------------------------------------------- VERY IMPORTANTE ------------------------------------------------------------------------------------ */
+  //ALWAYS use this format when redirecting, so we keep the current userID across all pages
   handleTeamStatsPage() {
-    window.location.replace('/TeamStats');
+    this.props.history.push({
+      pathname: '/TeamStats',
+      state: {
+          username: this.state.username,
+          loggedIn: this.state.loggedIn
+      }
+  });
+  }
+
+    /* --------------------------------------------------------------------------------- VERY IMPORTANTE ------------------------------------------------------------------------------------ */
+  //ALWAYS use this format when redirecting, so we keep the current userID across all pages
+  handlePlayersPage() {
+    this.props.history.push({
+      pathname: '/Players',
+      state: {
+          username: this.state.username,
+          loggedIn: this.state.loggedIn
+      }
+  });
   }
 
   render() {
@@ -56,7 +78,7 @@ class Navbar extends Component {
                 <Typography variant="h6" className={classes.title}>
                 BoilerBets
                 </Typography>
-                <Button color="inherit">Players</Button>
+                <Button color="inherit" onClick={this.handlePlayersPage}>Players</Button>
                 <Button color="inherit" onClick={this.handleTeamStatsPage}>Teams</Button>
                 <Button color="inherit">Available Bets</Button>
                 <Button color="inherit" onClick={this.handleSignOut}>Sign Out</Button>

@@ -29,4 +29,22 @@ public class TeamController {
         return ts.getTeamStats();
     }
 
+    @PostMapping("/teamStatsByName")
+    public String getTeamInfo(@RequestBody String teamName){
+        TeamSQL ts = new TeamSQL();
+        String trimmedName = "";
+        boolean startName = false;
+        for (int i = 0; i < teamName.length(); i++) {
+            if (teamName.charAt(i) == ':') {
+                i += 2;
+                startName = true;
+            }
+            if (startName) {
+                if (teamName.charAt(i) != '}' && teamName.charAt(i) != '"')
+                trimmedName +=teamName.charAt(i);
+            }
+        }
+        return ts.getTeamNameStat(trimmedName);
+    }
+
 }
