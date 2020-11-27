@@ -1,16 +1,18 @@
 package server.Players;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.*;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 @Table(name="players")
+@EntityListeners(AuditingEntityListener.class)
 public class Player {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long playerId;
 
-    @NotBlank
+    @NotNull(message = "Please enter teamId")
     private long teamId;
 
     @NotBlank
