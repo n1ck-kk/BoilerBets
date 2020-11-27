@@ -4,32 +4,26 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-@Table(name = "players")
+@Table(name="players")
 public class Player {
     @Id
-    @GeneratedValue
-    @Column (name="playerId")
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private long playerId;
 
     @NotBlank
-    @Column (name="teamId")
     private long teamId;
 
     @NotBlank
-    @Column (name="teamName")
     private String teamName;
 
     @NotBlank
-    @Column (name="position")
     private String position;
 
-    @Column (name="collegeName")
     private String collegeName;
 
-    @Column (name="playerNumber")
     private String playerNumber;
 
-    protected Player() {}
+    public Player() {}
 
     public Player(long playerId, long teamId, String teamName, String Position) {
         super();

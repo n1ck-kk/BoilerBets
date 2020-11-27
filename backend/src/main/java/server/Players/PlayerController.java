@@ -43,6 +43,7 @@ public class PlayerController {
 			//conn = DriverManager.getConnection(url, "root", "root");//development
 			//smt = conn.createStatement();
 			
+			
 		}catch(Exception e){
 			e.printStackTrace();
 			
