@@ -38,10 +38,10 @@ public class PlayerController {
 	private String database;
 
     public PlayerController(){	
-		url = "jdbc:mysql://35.238.205.120:3306/";
+		//url = "jdbc:mysql://35.238.205.120:3306/";
 		try{
-			conn = DriverManager.getConnection(url, "root", "root");//development
-			smt = conn.createStatement();
+			//conn = DriverManager.getConnection(url, "root", "root");//development
+			//smt = conn.createStatement();
 			
 		}catch(Exception e){
 			e.printStackTrace();
@@ -54,6 +54,11 @@ public class PlayerController {
     @Autowired
     PlayerRepository playerRepository;
 
+	@GetMapping("/")
+	public String base(){
+		return "\"help\": \"me\"";
+	}
+
     @PostMapping("/insertPlayer")
     public Player addPlayer(@RequestBody Player player){
         return playerRepository.save(player);
@@ -61,6 +66,7 @@ public class PlayerController {
 
     @GetMapping("/getAllPlayers")
     public Iterable<Player> getPlayers() {
+		System.out.println("HERE");
         return playerRepository.findAll();
     }
 }
