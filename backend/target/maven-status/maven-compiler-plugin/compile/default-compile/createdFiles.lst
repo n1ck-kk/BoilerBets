@@ -1,9 +1,13 @@
 server\User\UserSerializer.class
 server\Team\TeamStats.class
+server\Players\Player.class
 server\User\Email.class
 server\User\User.class
 server\SQL\TeamSQL.class
+server\SQL\UserSQL.class
 server\Team\TeamController.class
 server\main.class
+server\Players\PlayerController.class
 server\User\UserDeserializer.class
+server\Players\PlayerRepository.class
 server\User\UserController.class

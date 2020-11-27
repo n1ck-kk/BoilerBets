@@ -2,9 +2,11 @@ package server;
 import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.*;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @RestController
 @SpringBootApplication
+@EnableJpaAuditing
 public class main {
 
     @RequestMapping("/")

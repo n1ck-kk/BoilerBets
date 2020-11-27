@@ -9,3 +9,5 @@ backend/target/*
 backend/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
 backend/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
 frontend/package-lock.json
+*.class
+backend/target/classes/server/main.class
