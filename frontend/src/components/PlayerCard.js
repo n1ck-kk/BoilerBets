@@ -38,7 +38,7 @@ export default class PlayerCard extends React.Component{
     /* Get team info from teamStats and render in popup */
     async handleClick (e) {
         e.preventDefault();
-        console.log(this.props.playerId);
+        console.log(parseInt(this.props.playerId) + 1);
         await fetch('http://localhost:8080/player/getPlayerStats', {
             method: 'POST',
             headers: {
@@ -46,7 +46,7 @@ export default class PlayerCard extends React.Component{
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                playerId: this.props.playerId
+                playerId: parseInt(this.props.playerId) + 1
             })
         }).then(res => res.text()).then((data) => {
             console.log(data);
@@ -65,7 +65,7 @@ export default class PlayerCard extends React.Component{
                     <Card style={{width: "500px"}} >
                         <CardContent>
                             <div className="left aligned">
-                                {this.props.teamName}
+                                {this.props.playerId}
                             </div>
                         </CardContent>
                     </Card>

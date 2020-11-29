@@ -25,18 +25,27 @@ public class Player {
 
     private String playerNumber;
 
-    public Player() {}
-
-    public Player(long playerId, long teamId, String teamName, String Position) {
+    public Player() {
         super();
-        this.playerId = playerId;
+    }
+
+    public Player(long teamId, String teamName, String Position) {
+        super();
         this.teamId = teamId;
         this.teamName = teamName;
         this.position = Position;
     }
 
-    public Player(long playerId, long teamId, String teamName, String Position, String collegeName, String playerNumber) {
-        this(playerId, teamId, teamName, Position);
+    public Player(String teamID, String position, String collegeName, String playerNumber) {
+        super();
+        this.teamId = Long.parseLong(teamID);
+        this.position = position;
+        this.collegeName = collegeName;
+        this.playerNumber = playerNumber;
+    }
+
+    public Player(long teamId, String teamName, String Position, String collegeName, String playerNumber) {
+        this(teamId, teamName, Position);
         this.collegeName = collegeName;
         this.playerNumber = playerNumber;
     }
@@ -64,5 +73,9 @@ public class Player {
 
     public void setPosition(String position) {
         this.position = position;
+    }
+
+    public String toString() {
+        return "playerId: " + this.playerId + ", teamId: " + this.teamId + ", teamName: " + this.teamName + ", position: " + this.position + ", collegeName: " + this.collegeName + ", playerNumber: " + this.playerNumber;
     }
 }
