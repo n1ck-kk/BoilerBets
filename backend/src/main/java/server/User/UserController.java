@@ -122,5 +122,20 @@ public class UserController {
 		String insert  = users.insertUser(u.username, u.password, u.name, u.email);	
 
 	    return insert;
+	}
+	
+	@PostMapping("/getIdByUsername")
+    public String getIdByUsername(@RequestBody String username) 
+			throws JsonParseException, JsonMappingException, IOException {
+
+		System.out.println(username);
+		username = username.substring(username.indexOf(":") + 2);
+		username = username.substring(0, username.length() - 2);
+		System.out.println(username);
+
+		UserSQL users = new UserSQL();
+		String id  = users.getIdByUsername(username);	
+
+	    return id;
     }
 }

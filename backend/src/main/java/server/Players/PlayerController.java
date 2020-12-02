@@ -24,6 +24,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import org.springframework.context.annotation.Bean;
 import java.sql.*;
+import server.SQL.PlayerStatsSQL;;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
@@ -84,7 +85,14 @@ public class PlayerController {
 			e.printStackTrace();
 		}
 		newPlayer.setTeam(newPlayer.getTeamId(), result);
-		return playerRepository.save(newPlayer);
+		Player savedPlayer = playerRepository.save(newPlayer);
+
+		Long newPlayerID = savedPlayer.getId();
+		PlayerStatsSQL psSQL = new PlayerStatsSQL();
+
+		psSQL.insertPlayerStats(newPlayerID, playerInfo);
+
+		return savedPlayer;
     }
 
     @GetMapping("/getAllPlayers")

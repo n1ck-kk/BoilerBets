@@ -30,8 +30,8 @@ export default class Players extends Component {
         this.props.history.push({
             pathname: '/AddPlayer',
             state: {
-                username: this.state.username,
-                loggedIn: this.state.loggedIn
+                username: this.props.location.state.username,
+                loggedIn: true
             }
         });
     }

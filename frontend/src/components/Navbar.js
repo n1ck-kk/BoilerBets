@@ -28,6 +28,7 @@ class Navbar extends Component {
     this.handleSignOut = this.handleSignOut.bind(this);
     this.handleTeamStatsPage = this.handleTeamStatsPage.bind(this);
     this.handlePlayersPage = this.handlePlayersPage.bind(this);
+    this.handleAvailableBetsPage = this.handleAvailableBetsPage.bind(this);
     this.state = {
       username: this.props.location.state.username,
       loggedIn: this.props.location.state.loggedIn
@@ -50,6 +51,7 @@ class Navbar extends Component {
       pathname: '/TeamStats',
       state: {
           username: this.state.username,
+          userId: this.state.userId,
           loggedIn: this.state.loggedIn
       }
   });
@@ -62,6 +64,18 @@ class Navbar extends Component {
       pathname: '/Players',
       state: {
           username: this.state.username,
+          userId: this.state.userId,
+          loggedIn: this.state.loggedIn
+      }
+  });
+  }
+
+  handleAvailableBetsPage() {
+    this.props.history.push({
+      pathname: '/BetStats',
+      state: {
+          username: this.state.username,
+          userId: this.state.userId,
           loggedIn: this.state.loggedIn
       }
   });
@@ -80,7 +94,7 @@ class Navbar extends Component {
                 </Typography>
                 <Button color="inherit" onClick={this.handlePlayersPage}>Players</Button>
                 <Button color="inherit" onClick={this.handleTeamStatsPage}>Teams</Button>
-                <Button color="inherit">Available Bets</Button>
+                <Button color="inherit" onClick={this.handleAvailableBetsPage}>Available Bets</Button>
                 <Button color="inherit" onClick={this.handleSignOut}>Sign Out</Button>
             </Toolbar>
             </AppBar>

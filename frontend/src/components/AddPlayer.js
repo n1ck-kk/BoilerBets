@@ -17,7 +17,16 @@ class AddPlayer extends Component {
             team_id: '',
             position: '',
             college_name: '',
-            player_number: ''
+            player_number: '',
+            avgP: 0,
+            avgAST: 0,
+            avgBLK: 0,
+            avgSTL: 0,
+            avgTO: 0,
+            avgMin: 0,
+            avgFG: 0,
+            avgFG3: 0,
+            avgFT: 0
         }
     }
 
@@ -43,15 +52,24 @@ class AddPlayer extends Component {
                 teamID: this.state.team_id,
                 position: this.state.position,
                 collegeName: this.state.college_name,
-                playerNumber: this.state.player_number
+                playerNumber: this.state.player_number,
+                avgP: this.state.avgP,
+                avgAST: this.state.avgAST,
+                avgBLK: this.state.avgBLK,
+                avgSTL: this.state.avgSTL,
+                avgTO: this.state.avgTO,
+                avgMin: this.state.avgMin,
+                avgFG: this.state.avgFG,
+                avgFG3: this.state.avgFG3,
+                avgFT: this.state.avgFT
             })
         }).then(res => res.text()).then((data) => {
             console.log(data);
             this.props.history.push({
                 pathname: '/Players',
                 state: {
-                    username: this.props.history.username,
-                    loggedIn: this.props.history.loggedIn
+                    username: this.props.location.state.username,
+                    loggedIn: true
                 }
             });
         }).catch(console.log)
@@ -78,6 +96,42 @@ class AddPlayer extends Component {
                             <div className="input-field col s12">
                                 <PersonOutline />
                                 <input type="text" id="player_number" placeholder="Player Number" onChange = {this.handleChange} />
+                            </div>
+                            <div className="input-field col s12">
+                                <PersonOutline />
+                                <input type="number" id="avgP" placeholder="Average Points" onChange = {this.handleChange} />
+                            </div>
+                            <div className="input-field col s12">
+                            <PersonOutline />
+                                <input type="number" id="avgAST" placeholder="Average Assists" onChange = {this.handleChange} />
+                            </div>
+                            <div className="input-field col s12">
+                            <PersonOutline />
+                                <input type="number" id="avgBLK" placeholder="Average Blocks" onChange = {this.handleChange} />
+                            </div>
+                            <div className="input-field col s12">
+                            <PersonOutline />
+                                <input type="number" id="avgSTL" placeholder="Average Steals" onChange = {this.handleChange} />
+                            </div>
+                            <div className="input-field col s12">
+                            <PersonOutline />
+                                <input type="number" id="avgTO" placeholder="Average Turnovers" onChange = {this.handleChange} />
+                            </div>
+                            <div className="input-field col s12">
+                            <PersonOutline />
+                                <input type="number" id="avgMin" placeholder="Average Minutes" onChange = {this.handleChange} />
+                            </div>
+                            <div className="input-field col s12">
+                            <PersonOutline />
+                                <input type="number" id="avgFG" placeholder="Average Field Goals" onChange = {this.handleChange} />
+                            </div>
+                            <div className="input-field col s12">
+                            <PersonOutline />
+                                <input type="number" id="avgFG3" placeholder="Average 3 Pointers" onChange = {this.handleChange} />
+                            </div>
+                            <div className="input-field col s12">
+                            <PersonOutline />
+                                <input type="number" id="avgFT" placeholder="Average Freethrows" onChange = {this.handleChange} />
                             </div>
                             <div className= "spacer"></div>
                             <button className = "btn btn-primary" type="submit">Add Player</button>
