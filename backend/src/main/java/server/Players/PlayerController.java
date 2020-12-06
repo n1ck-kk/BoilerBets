@@ -24,7 +24,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import org.springframework.context.annotation.Bean;
 import java.sql.*;
-import server.SQL.PlayerStatsSQL;;
+import server.SQL.PlayerStatsSQL;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
@@ -103,15 +103,20 @@ public class PlayerController {
 	
 	@PostMapping("/getPlayerStats")
 	public Player findPlayer(@RequestBody String player_id) {
+		System.out.println("Getting player stats");
 		System.out.println(player_id);
+		
 		int startIndex = player_id.indexOf(":");
 		String player_num = player_id.substring(startIndex + 1, startIndex + 2);
 		System.out.println(player_num);
+		PlayerStatsSQL pss = new PlayerStatsSQL();
+		String t  = pss.getPlayersStats(Integer.parseInt(player_num));
 		Iterable<Player> playerList = playerRepository.findAll();
 		for (Player player : playerList ) {
 			System.out.println(player.toString());
 			if (player.getId() == Long.parseLong(player_num)) {
 				//System.out.println(player.toString());
+				player.playerStats = t;
 				return player;
 			}
 		}

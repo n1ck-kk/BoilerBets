@@ -25,6 +25,8 @@ public class Player {
 
     private String playerNumber;
 
+    public String playerStats;
+
     public Player() {
         super();
     }

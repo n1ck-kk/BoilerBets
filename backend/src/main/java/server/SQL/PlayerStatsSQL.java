@@ -89,4 +89,37 @@ public class PlayerStatsSQL {
         }
         
     }
+
+	public String getPlayersStats(int playerId){
+		try {
+			System.out.println("Getting player statssql");
+			psmt = conn.prepareStatement("select * from "+this.database+".playerStats where playerId = ?");
+			psmt.setLong(1, playerId);
+			rs = psmt.executeQuery();
+			String playerStats = "";
+			//ObjectMapper om = new ObjectMapper();
+			//System.out.println("OM: "+om.writeValueAsString(rs));
+			while(rs.next()){
+				playerStats+="{ player_id: "+rs.getInt("playerId")+",";
+				playerStats+=" avgP: "+rs.getInt("avgP")+",";
+				playerStats+=" avgAST: "+rs.getInt("avgAST")+",";
+				playerStats+=" avgBLK: "+rs.getInt("avgBLK")+",";
+				playerStats+=" avgSTL: "+rs.getInt("avgSTL")+",";
+				playerStats+=" avgTO: "+rs.getInt("avgTO")+",";
+				playerStats+=" avgMin: "+rs.getInt("avgMin")+",";
+				playerStats+=" avgFG: "+rs.getInt("avgFG")+",";
+				playerStats+=" avgFG3: "+rs.getInt("avgFG3")+",";
+				playerStats+=" avgFT: "+rs.getInt("avgFT")+" }";
+			}
+			System.out.println("JSON: "+playerStats);
+			rs.close();
+			psmt.close();
+			conn.close();
+			//System.out.println(teamId);
+			return playerStats;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 }
