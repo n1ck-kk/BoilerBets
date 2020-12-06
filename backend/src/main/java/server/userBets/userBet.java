@@ -8,7 +8,7 @@ public class userBet {
     private long userId;
     private long betId;
     private long amount;
-    private long payout;
+    private Double payout;
     private String betSuccess;
 
     public userBet() {
@@ -20,7 +20,7 @@ public class userBet {
         this.userId = Long.parseLong(userId);
         this.betId = Long.parseLong(betId);
         this.amount = Long.parseLong(amount);
-        this.payout = Long.parseLong(payout);
+        this.payout = Double.parseDouble(payout);
         this.betSuccess = betSuccess;
     }
 
@@ -36,7 +36,7 @@ public class userBet {
         return this.amount;
     }
 
-    public long getPayout() {
+    public Double getPayout() {
         return this.payout;
     }
 

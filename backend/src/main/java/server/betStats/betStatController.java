@@ -28,4 +28,42 @@ public class betStatController {
         betStatSQL bs = new betStatSQL();
         return bs.getAvailableBets();
     }
+    @GetMapping("/getPopularBets")
+    public String getPopularBets() {
+        betStatSQL bs = new betStatSQL();
+        return bs.getPopularBets();
+    }
+    @GetMapping("/getMaxBet")
+    public String getMaxBet() {
+        betStatSQL bs = new betStatSQL();
+        return bs.getMaxBet();
+    }
+    @GetMapping("/sortByOddsAsc")
+    public String sortOddsAsc() {
+        betStatSQL bs = new betStatSQL();
+        return bs.sortByOddsAsc();
+    }
+    @GetMapping("/sortByOddsDesc")
+    public String sortOddsDesc() {
+        betStatSQL bs = new betStatSQL();
+        return bs.sortByOddsDesc();
+    }
+    @GetMapping("/getBetForHighestWinTeam")
+    public String getBetForHighestWinTeam() {
+        betStatSQL bs = new betStatSQL();
+        return bs.getBetForHighestWinPercTeam();
+    }
+    @GetMapping("/sortByType")
+    public String sortByType() {
+        betStatSQL bs = new betStatSQL();
+        return bs.sortByType();
+    }
+    @GetMapping("/sortByTeam")
+    public String sortByTeam() {
+        betStatSQL bs = new betStatSQL();
+        return bs.sortByTeam();
+    }
+
 }
+
+

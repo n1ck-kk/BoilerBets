@@ -36,7 +36,7 @@ public class userBetSQL {
 			psmt.setLong(1, betInfo.getUserId());
 			psmt.setLong(2, betInfo.getBetId());
 			psmt.setLong(3, betInfo.getAmount());
-            psmt.setLong(4, betInfo.getPayout());
+            psmt.setDouble(4, betInfo.getPayout());
             psmt.setString(5, betInfo.getBetSuccess());
             System.out.println(query);
             psmt.executeUpdate();
