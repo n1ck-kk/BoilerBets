@@ -7,6 +7,8 @@ import SignUp from './components/SignUp.js';
 import Dashboard from './components/Dashboard.js';
 import TeamStats from './components/TeamStats.js';
 import Players from './components/Players.js';
+import AddPlayer from './components/AddPlayer.js';
+import BetStats from './components/BetStats.js';
 import { render } from '@testing-library/react';
 
 class App extends Component {
@@ -29,6 +31,8 @@ class App extends Component {
             <Route exact path ='/Dashboard' component ={Dashboard}/>
             <Route exact path ='/TeamStats' component = {TeamStats}/>
             <Route exact path ='/Players' component = {Players}/>
+            <Route exact path ='/AddPlayer' component={AddPlayer}/>
+            <Route exact path ='/BetStats' component={BetStats}/>
           </Switch>
       </div>
       </BrowserRouter>

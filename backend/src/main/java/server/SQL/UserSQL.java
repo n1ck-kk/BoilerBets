@@ -119,6 +119,31 @@ public class UserSQL {
 		}
 	}
 
+	public String getIdByUsername(String name) {
+		try{
+			String query = "select userId from "+ this.database+".users where username = ?";
+			psmt = conn.prepareStatement(query);
+			psmt.setString(1, name);
+			rs = psmt.executeQuery();
+			String userId = "";
+
+			while (rs.next())
+			{
+				userId = rs.getString("userId");
+			}
+			rs.close();
+			psmt.close();
+			conn.close();
+			//System.out.println(returnUser);
+			return userId;
+
+
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 	public User[] searchUsers(String request){
 		StringBuilder searchString = new StringBuilder("%" + request + "%");
 		for (int i = 0; i < request.length(); i++) {

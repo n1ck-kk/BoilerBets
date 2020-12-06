@@ -63,6 +63,7 @@ class SignIn extends Component {
                 pathname: '/Dashboard',
                 state: {
                     username: this.state.username,
+                    userId: this.state.userId,
                     loggedIn: this.state.loggedIn
                 }
             });

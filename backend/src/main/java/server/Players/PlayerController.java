@@ -24,6 +24,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import org.springframework.context.annotation.Bean;
 import java.sql.*;
+import server.SQL.PlayerStatsSQL;;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
@@ -38,10 +39,10 @@ public class PlayerController {
 	private String database;
 
     public PlayerController(){	
-		//url = "jdbc:mysql://35.238.205.120:3306/";
+		url = "jdbc:mysql://35.238.205.120:3306/";
 		try{
-			//conn = DriverManager.getConnection(url, "root", "root");//development
-			//smt = conn.createStatement();
+			conn = DriverManager.getConnection(url, "root", "root");//development
+			smt = conn.createStatement();
 			
 			
 		}catch(Exception e){
@@ -61,13 +62,61 @@ public class PlayerController {
 	}
 
     @PostMapping("/insertPlayer")
-    public Player addPlayer(@RequestBody Player player){
-        return playerRepository.save(player);
+    public Player addPlayer(@RequestBody String playerInfo) throws JsonParseException, JsonMappingException, IOException {
+		// Parse the arguments
+		ObjectMapper om = new ObjectMapper();
+		SimpleModule sm = new SimpleModule("PlayerDeserializer", new Version(1, 0, 0, null, null, null));
+		sm.addDeserializer(Player.class, new PlayerDeserializer());
+		om.registerModule(sm);
+
+		Player newPlayer = om.readValue(playerInfo, Player.class);
+
+		String result = "";
+		try{
+			psmt = conn.prepareStatement("select teamName from " +this.database+".teams where teamId = ?");
+			psmt.setString(1, Long.toString(newPlayer.getTeamId()));
+			rs = psmt.executeQuery();
+			while (rs.next())
+			{
+                result += rs.getString("teamName");
+			}
+			System.out.println(result);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		newPlayer.setTeam(newPlayer.getTeamId(), result);
+		Player savedPlayer = playerRepository.save(newPlayer);
+
+		Long newPlayerID = savedPlayer.getId();
+		PlayerStatsSQL psSQL = new PlayerStatsSQL();
+
+		psSQL.insertPlayerStats(newPlayerID, playerInfo);
+
+		return savedPlayer;
     }
 
     @GetMapping("/getAllPlayers")
     public Iterable<Player> getPlayers() {
 		System.out.println("HERE");
         return playerRepository.findAll();
-    }
+	}
+	
+	@PostMapping("/getPlayerStats")
+	public Player findPlayer(@RequestBody String player_id) {
+		System.out.println(player_id);
+		int startIndex = player_id.indexOf(":");
+		String player_num = player_id.substring(startIndex + 1, startIndex + 2);
+		System.out.println(player_num);
+		Iterable<Player> playerList = playerRepository.findAll();
+		for (Player player : playerList ) {
+			System.out.println(player.toString());
+			if (player.getId() == Long.parseLong(player_num)) {
+				//System.out.println(player.toString());
+				return player;
+			}
+		}
+
+		System.out.println("returning null");
+		return null;
+	}
 }
