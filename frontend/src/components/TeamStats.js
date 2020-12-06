@@ -5,10 +5,10 @@ import 'materialize-css';
 import Navbar from './Navbar.js';
 import { makeStyles } from '@material-ui/styles';
 import '../css/SignIn.css';
-import { Grid } from '@material-ui/core';
-import TeamCard from './../TeamCard.js';
+import { Grid, Header, Button } from 'semantic-ui-react';
+import TeamCard from './TeamCard.js';
 import '../css/TeamStats.css';
-import TeamStatsCard from './../TeamStatsCard.js';
+import TeamStatsCard from './TeamStatsCard.js';
 
 
 export default class TeamStats extends Component {
@@ -17,8 +17,12 @@ export default class TeamStats extends Component {
         super(props);
         this.state = {
             teamList: [],
+            teamInfo: [],
+            teamName: 'Select A Team'
         };
         this.handleGetTeamStats = this.handleGetTeamStats.bind(this);
+        this.handleGetTeamInfo = this.handleGetTeamInfo.bind(this);
+        this.handleTeamClicked = this.handleTeamClicked.bind(this);
     }
 
     /* Use axios to get team stats from db here */
@@ -27,22 +31,34 @@ export default class TeamStats extends Component {
         this.handleGetTeamStats();
     }
 
-
     /* Once we have user bets, use map() to put them into a materialize table or somethin */
     render() {
         //console.log(this.props.location.state);
-        console.log(this.state.teamList[1]);
+        console.log('RERENDER');
         return (
             <div className = "container"> {/* Section that displays the navbar */}
                 <Navbar />
-                <div className="scrollBox">
-                    {this.state.teamList.map((teamList, index) => {
-                        console.log(index);
-                            return(<TeamCard teamName={this.state.teamList[index]} />)
-                        }
-                    )}
-                </div>
+                <Grid style={{width: '100vw', height: '90vh'}} columns={2}>
+                    <Grid.Column style={{width: '50vw', height: '80vh'}}> {/* Grid colummn for team list */}
+                            <div className="scrollBox">
+                                {this.state.teamList.map((teamList, index) => {
+                                    console.log(index);
+                                        return( <Button style={{width: '20vw'}} horizontalAlign='middle' onClick={() => {this.handleTeamClicked(this.state.teamList[index]);}}>
+                                                    {this.state.teamList[index]}
+                                                </Button>)
+                                    }
+                                )}
+                            </div>
+                    </Grid.Column>
+
+                    <Grid.Column style={{width: '50vw', height: '80vh'}} verticalAlign='middle' textAlgin='middle'> {/* Grid colummn for team stats once a team is clicked */}
+                        <TeamStatsCard teamName={this.state.teamName} info={this.state.teamInfo} />
+                        {/* <Header>HEYEYEYEYEYEYEYEYEYEYEYYEY</Header> */}
+                    </Grid.Column>
+                </Grid>
+
             </div>
+        
 
             
                 
@@ -66,6 +82,37 @@ export default class TeamStats extends Component {
                 //console.log(this.state.teamList);
             }).catch(console.log("ERR")); // here's how u set variables u want to use later
     }
+
+    /* Get team info from teamStats and render in popup */
+    async handleGetTeamInfo (teamName) {
+        //e.preventDefault();
+        //console.log(this.props.teamName);
+        if (teamName != this.state.teamName){
+            await fetch('http://localhost:8080/team/teamStatsByName', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    teamName: teamName
+                })
+            }).then(res => res.text()).then((data) => {
+                console.log(data);
+                this.setState({
+                    teamInfo: data
+                })
+            }).catch(console.log)
+        }
+    }
+
+    async handleTeamClicked(teamName) {
+        this.handleGetTeamInfo(teamName);
+        this.setState({teamName: teamName})
+    }
+
+
+
 } //end default class TeamStats
 
 //withRouter(Dashboard);

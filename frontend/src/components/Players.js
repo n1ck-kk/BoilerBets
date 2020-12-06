@@ -12,7 +12,7 @@ import Button from '@material-ui/core/Button';
 import '../css/Player.css';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import TeamStatsCard from './../TeamStatsCard.js';
+import TeamStatsCard from './TeamStatsCard.js';
 
 
 export default class Players extends Component {

@@ -2,20 +2,22 @@ import React from "react";
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
-import CustomPopup from './components/CustomPopup'
-import { config } from './config/config.js';
+import CustomPopup from './CustomPopup'
+import '../css/TeamStats.css';
+import { config } from '../config/config.js';
 import {Link} from "react-router-dom";
+import TeamStatsCard from './TeamStatsCard.js'
 
 
 export default class TeamCard extends React.Component{
 
     constructor(props){
         super(props);
-        this.handleClick = this.handleClick.bind(this);
         this.state = {
             teamInfo: '',
             renderPopup: false
         }
+        this.handleGetTeamInfo = this.handleGetTeamInfo.bind(this);
     }
 
     async componentDidMount(){
@@ -33,8 +35,7 @@ export default class TeamCard extends React.Component{
         });  
     }
 
-    /* Get team info from teamStats and render in popup */
-    async handleClick (e) {
+    async handleGetTeamInfo (e) {
         e.preventDefault();
         console.log(this.props.teamName);
         await fetch('http://localhost:8080/team/teamStatsByName', {
@@ -59,8 +60,8 @@ export default class TeamCard extends React.Component{
 
         return(
            <div>
-               <Button onClick = {this.handleClick} top-margin = "0px">
-                    <Card style={{width: "500px"}} >
+               <Button onClick = {this.handleGetTeamInfo} top-margin = "0px">
+                    <Card style={{width: "20vw"}} >
                         <CardContent>
                             <div className="left aligned">
                                 {this.props.teamName}
@@ -69,10 +70,7 @@ export default class TeamCard extends React.Component{
                     </Card>
                </Button>
                {this.state.renderPopup ? 
-                    <CustomPopup 
-                        text = {this.state.teamInfo}
-                        closePopup = {this.togglePopup.bind(this)}
-                    />
+                    <TeamStatsCard teamName={this.props.teamName} info={this.state.teamInfo} />
                 : ''}
             </div>
         )//End return(...)
