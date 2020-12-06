@@ -42,7 +42,7 @@ export default class TeamStats extends Component {
                     <Grid.Column style={{width: '50vw', height: '80vh'}}> {/* Grid colummn for team list */}
                             <div className="scrollBox">
                                 {this.state.teamList.map((teamList, index) => {
-                                    console.log(index);
+                                    console.log(teamList[index]);
                                         return( <Button style={{width: '20vw'}} horizontalAlign='middle' onClick={() => {this.handleTeamClicked(this.state.teamList[index]);}}>
                                                     {this.state.teamList[index]}
                                                 </Button>)
@@ -99,9 +99,13 @@ export default class TeamStats extends Component {
                 })
             }).then(res => res.text()).then((data) => {
                 console.log(data);
+                console.log(Object.keys(JSON.parse(data)));
+                console.log(Object.keys(data));
+                console.log(Object.values(JSON.parse(data))[0]);
                 this.setState({
-                    teamInfo: data
+                    teamInfo: Object.values(JSON.parse(data))[0]
                 })
+                
             }).catch(console.log)
         }
     }
