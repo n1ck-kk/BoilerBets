@@ -32,7 +32,7 @@ public class userBetSQL {
         try{
 			//Doing Transaction
 			// need to check if bet exists in betStats table first
-			conn.setTransactionIsolation(Connection.TRANSACTION_REPEATABLE_READ);
+			conn.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
 			conn.setAutoCommit(false);
 
 			//check if bet still exists in betstats and that endDate is not past
