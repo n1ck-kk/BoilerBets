@@ -85,14 +85,14 @@ public class TeamSQL {
                 result+= "\""+teamName+"\": {";
 				result+= "\"wins\": "+rs.getInt("wins");
 				result+= ",\"losses\": "+rs.getInt("losses");
-				result+= ",\"winPct\": "+rs.getInt("winPct");
-                result+= ",\"avgP\": "+rs.getInt("avgP");
-                result+= ",\"avgFGP\": "+rs.getInt("avgFGP");
-                result+= ",\"avg3PP\": "+rs.getInt("avg3PP");
-                result+= ",\"avgFTP\": "+rs.getInt("avgFTP");
-                result+= ",\"avgAST\": "+rs.getInt("avgAST");
-                result+= ",\"avgTO\": "+rs.getInt("avgTO");
-                result+= ",\"avgBLK\": "+rs.getInt("avgBLK");
+				result+= ",\"winPct\": "+rs.getDouble("winPct");
+                result+= ",\"avgP\": "+rs.getDouble("avgP");
+                result+= ",\"avgFGP\": "+rs.getDouble("avgFGP");
+                result+= ",\"avg3PP\": "+rs.getDouble("avg3PP");
+                result+= ",\"avgFTP\": "+rs.getDouble("avgFTP");
+                result+= ",\"avgAST\": "+rs.getDouble("avgAST");
+                result+= ",\"avgTO\": "+rs.getDouble("avgTO");
+                result+= ",\"avgBLK\": "+rs.getDouble("avgBLK");
 				result+=" }, ";
 			}
             result = result.substring(0, result.length()-2);
@@ -128,14 +128,14 @@ public String getTeamStats(){
                 all+= "\""+rs.getString("teamName")+"\": {";
 				all+= "\"wins\": "+rs.getInt("wins");
 				all+= ",\"losses\": "+rs.getInt("losses");
-				all+= ",\"winPct\": "+rs.getInt("winPct");
-                all+= ",\"avgP\": "+rs.getInt("avgP");
-                all+= ",\"avgFGP\": "+rs.getInt("avgFGP");
-                all+= ",\"avg3PP\": "+rs.getInt("avg3PP");
-                all+= ",\"avgFTP\": "+rs.getInt("avgFTP");
-                all+= ",\"avgAST\": "+rs.getInt("avgAST");
-                all+= ",\"avgTO\": "+rs.getInt("avgTO");
-                all+= ",\"avgBLK\": "+rs.getInt("avgBLK");
+				all+= ",\"winPct\": "+rs.getDouble("winPct");
+                all+= ",\"avgP\": "+rs.getDouble("avgP");
+                all+= ",\"avgFGP\": "+rs.getDouble("avgFGP");
+                all+= ",\"avg3PP\": "+rs.getDouble("avg3PP");
+                all+= ",\"avgFTP\": "+rs.getDouble("avgFTP");
+                all+= ",\"avgAST\": "+rs.getDouble("avgAST");
+                all+= ",\"avgTO\": "+rs.getDouble("avgTO");
+                all+= ",\"avgBLK\": "+rs.getDouble("avgBLK");
 
 				// String lastLogin = rs.getInt("lastLogin");
 				all+=" }, ";

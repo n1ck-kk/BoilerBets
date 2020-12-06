@@ -261,6 +261,10 @@ public class betStatSQL {
 
     public String getUserBets() {
         try {
+
+            conn.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
+            conn.setAutoCommit(false);
+
             psmt = conn.prepareStatement("SELECT userId, a.betId, amount, payout, betSuccess, startDate, endDate, odds, type, teamName FROM "+this.database+".userBets as a JOIN ("+this.database+".betStats as b JOIN "+this.database+".teams as t on b.teamId = t.teamId) on a.betId = b.betId;");
             rs = psmt.executeQuery();
             String result = "{";
@@ -280,6 +284,9 @@ public class betStatSQL {
 			}
             result = result.substring(0, result.length()-2);
             result +=" }";
+
+            conn.commit();
+
             rs.close();
 			psmt.close();
             conn.close();
