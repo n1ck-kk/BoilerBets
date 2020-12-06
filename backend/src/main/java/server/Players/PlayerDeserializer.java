@@ -40,7 +40,8 @@ public class PlayerDeserializer extends StdDeserializer<Player> {
             node.get("teamID").asText(),
             node.get("position").asText(),
             node.get("collegeName").asText(),
-            node.get("playerNumber").asText());
+            node.get("playerNumber").asText(),
+            node.get("playerName").asText());
 		
 
         return u;

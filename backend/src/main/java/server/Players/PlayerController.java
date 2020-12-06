@@ -107,7 +107,7 @@ public class PlayerController {
 		System.out.println(player_id);
 		
 		int startIndex = player_id.indexOf(":");
-		String player_num = player_id.substring(startIndex + 1, startIndex + 2);
+		String player_num = player_id.substring(startIndex + 1, player_id.length()-1);//, startIndex + 2);
 		System.out.println(player_num);
 		PlayerStatsSQL pss = new PlayerStatsSQL();
 		String t  = pss.getPlayersStats(Integer.parseInt(player_num));

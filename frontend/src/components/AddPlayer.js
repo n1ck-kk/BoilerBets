@@ -17,6 +17,7 @@ class AddPlayer extends Component {
             team_id: '',
             position: '',
             college_name: '',
+            player_name: '',
             player_number: '',
             avgP: 0,
             avgAST: 0,
@@ -52,6 +53,7 @@ class AddPlayer extends Component {
                 teamID: this.state.team_id,
                 position: this.state.position,
                 collegeName: this.state.college_name,
+                playerName: this.state.player_name,                
                 playerNumber: this.state.player_number,
                 avgP: this.state.avgP,
                 avgAST: this.state.avgAST,
@@ -92,6 +94,10 @@ class AddPlayer extends Component {
                             <div className="input-field col s12">
                                 <Email />
                                 <input type="text" id="college_name" placeholder="College Name" onChange = {this.handleChange} />
+                            </div>
+                            <div className="input-field col s12">
+                                <PersonOutline />
+                                <input type="text" id="player_name" placeholder="Player Name" onChange = {this.handleChange} />
                             </div>
                             <div className="input-field col s12">
                                 <PersonOutline />
