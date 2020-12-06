@@ -1,12 +1,8 @@
 import React, {Component} from 'react';
-import { withRouter } from 'react-router-dom';
-import axios from 'axios';
 import 'materialize-css';
 import Navbar from './Navbar.js';
-import { makeStyles } from '@material-ui/styles';
 import '../css/SignIn.css';
 import { Grid, Header, Button } from 'semantic-ui-react';
-import TeamCard from './TeamCard.js';
 import '../css/TeamStats.css';
 import TeamStatsCard from './TeamStatsCard.js';
 
@@ -56,7 +52,6 @@ export default class TeamStats extends Component {
                         {/* <Header>HEYEYEYEYEYEYEYEYEYEYEYYEY</Header> */}
                     </Grid.Column>
                 </Grid>
-
             </div>
         
 

@@ -1,18 +1,11 @@
 import React, {Component} from 'react';
-import { withRouter } from 'react-router-dom';
-import axios from 'axios';
 import 'materialize-css';
 import Navbar from './Navbar.js';
-import { makeStyles } from '@material-ui/styles';
 import '../css/SignIn.css';
-import { Grid } from '@material-ui/core';
-import PlayerCard from './PlayerCard.js';
+import PlayerCard from './PlayerCard';
 import '../css/TeamStats.css';
-import Button from '@material-ui/core/Button';
+import {Grid, Button} from 'semantic-ui-react';
 import '../css/Player.css';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import TeamStatsCard from './TeamStatsCard.js';
 
 
 export default class Players extends Component {
@@ -21,19 +14,85 @@ export default class Players extends Component {
         super(props);
         this.state = {
             playerList: [],
+            playerName: 'Select A Player',
         };
         this.handleGetPlayers = this.handleGetPlayers.bind(this);
-        this.handleClick = this.handleClick.bind(this);
+        this.handlePlayerClicked = this.handlePlayerClicked.bind(this);
+        this.handleGetPlayerInfo = this.handleGetPlayerInfo.bind(this);
     }
 
-    async handleClick() {
-        this.props.history.push({
-            pathname: '/AddPlayer',
-            state: {
-                username: this.props.location.state.username,
-                loggedIn: true
-            }
-        });
+    /* Once we have user bets, use map() to put them into a materialize table or somethin */
+    render() {
+        //console.log(this.props.location.state);
+        console.log(this.state.playerList);
+        var playerCardValue;
+        if (this.state.playerInfo === undefined) {
+            playerCardValue = 
+            <PlayerCard playerName={this.state.playerName}/>
+        }
+        else {
+            playerCardValue = 
+            <PlayerCard teamName={this.state.playerInfo.teamName} playerName={this.state.playerStats.playerName} info={JSON.parse(this.state.playerInfo.playerStats)} />
+        }
+
+        return (
+            <div className = "container"> {/* Section that displays the navbar */}
+                <Navbar />
+                <Grid style={{width: '100vw', height: '90vh'}} columns={2}>
+                    <Grid.Column style={{width: '50vw', height: '80vh'}}> {/* Grid colummn for player list */}
+                            <div className="scrollBox">
+                                {this.state.playerList.map((playerList, index) => {
+                                    console.log(playerList);
+                                    console.log(this.state.playerList[index]);
+                                    return( <Button style={{width: '20vw'}} horizontalAlign='middle' onClick={() => {this.handlePlayerClicked(this.state.playerList[index]);}}>
+                                                {this.state.playerList[index]}
+                                            </Button>)
+                                    }
+                                )}
+                            </div>
+                    </Grid.Column>
+
+                    <Grid.Column style={{width: '50vw', height: '80vh'}} verticalAlign='middle' textAlgin='middle'> {/* Grid colummn for player stats once a player is clicked */}
+                        {playerCardValue}
+                    </Grid.Column>
+                </Grid>
+            </div>
+        )
+    }
+
+    /* Get player info from playerStats and render in popup */
+    async handleGetPlayerInfo (playerName) {
+        console.log("HEREEEEEEEEE");
+        console.log(this.state.playerName)
+        console.log(playerName);
+        
+        await fetch('http://localhost:8080/player/getPlayerStats', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                playerId: parseInt(playerName) + 1
+            })
+        }).then(res => res.text()).then((data) => {
+            console.log(data);
+            console.log(JSON.parse(data));
+            console.log(JSON.parse(data).teamName);
+            console.log(JSON.parse(data).playerName);
+            console.log(JSON.parse(data).playerStats);
+            console.log(JSON.stringify(JSON.parse(data).playerStats));
+            console.log(Object.keys(JSON.parse(data).playerStats));
+            console.log(Object.values(JSON.parse(data).playerStats));
+            console.log(Object.keys(JSON.parse(data).playerStats)[0]);
+            console.log(Object.values(JSON.parse(data).playerStats)[0]);
+
+
+
+            this.setState({
+                playerInfo: JSON.parse(data),
+            })
+        }).catch(console.log)
     }
 
     async handleGetPlayers() {
@@ -56,32 +115,9 @@ export default class Players extends Component {
         this.handleGetPlayers();
     }
 
-    /* Once we have user bets, use map() to put them into a materialize table or somethin */
-    render() {
-        //console.log(this.props.location.state);
-        console.log(this.state.playerList);
-        return (
-            <div className = "container"> {/* Section that displays the navbar */}
-                <Navbar />
-                <div className="scrollBox">
-                    {this.state.playerList.map((playerList, index) => {
-                        console.log(index);
-                            return(<PlayerCard playerId={this.state.playerList[index]} />)
-                        }
-                    )}
-                </div>
-                <div className = "buttonPos">
-                    <Button onClick = {this.handleClick} top-margin = "0px">
-                        <Card style={{width: "500px"}} >
-                            <CardContent>
-                                <div className="left aligned">
-                                    Add a new Player!
-                                </div>
-                            </CardContent>
-                        </Card>
-                    </Button>
-                </div>
-            </div>
-        )
+    async handlePlayerClicked(playerName) {
+        this.handleGetPlayerInfo(playerName);
+        this.setState({playerName: playerName})
     }
+    
 } 

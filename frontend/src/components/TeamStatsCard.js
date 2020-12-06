@@ -21,30 +21,28 @@ export default class TeamStatsCard extends React.Component{
 
     render() {
         if (this.props.teamName === 'Select A Team') { //Only is displayed if a team has not been chosen yet
-            return(<Card style={{width: '30vw'}} verticalAlign='middle' centered >
-                        <CardContent>
+            return(<Card style={{width: '30vw'}} verticalAlign='middle' centered>
+                        <CardContent color='grey'>
                             <Header>{this.props.teamName}</Header>
                         </CardContent>
                     </Card>)
         }
-        else{
+        else{ //Else a team has been selected
             return(
                 <div>
-                    <Card style={{width: "500px"}} centered >
+                    <Card style={{width: "30vw"}} centered >
                         <CardContent>
                             <Header>{this.props.teamName}</Header>
-                            wins: {this.props.info.wins} <br/>
-                            losses: {this.props.info.losses} <br/>
-                            winPct: {this.props.info.winPct} <br/>
-                            avg3PP: {this.props.info.avg3PP} <br/>
-                            avgAST: {this.props.info.avgAST} <br/>
-                            avgBLK: {this.props.info.avgBLK} <br/>
-                            avgFGP: {this.props.info.avgFGP} <br/>
-                            avgFTP: {this.props.info.avgFTP} <br/>
-                            avgP: {this.props.info.avgP} <br/>
-                            avgTO: {this.props.info.avgTO} <br/>
-                            
-                            
+                                Wins: {this.props.info.wins} <br/>
+                                Losses: {this.props.info.losses} <br/>
+                                Win Percent: {this.props.info.winPct}% <br/>
+                                Average 3-Point Percent: {this.props.info.avg3PP}% <br/>
+                                Average Assists: {this.props.info.avgAST} <br/>
+                                Average Blocks: {this.props.info.avgBLK} <br/>
+                                Average Field Goal Percent: {this.props.info.avgFGP}% <br/>
+                                Average Free Throw Percent: {this.props.info.avgFTP}% <br/>
+                                Average Points: {this.props.info.avgP} <br/>
+                                Average Turn-Overs: {this.props.info.avgTO} <br/>
                         </CardContent>
                     </Card>
                 </div>
