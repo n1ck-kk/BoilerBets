@@ -258,4 +258,40 @@ public class betStatSQL {
 			return null; //"/bet Fail";
         }
     }
+
+    public String getUserBets() {
+        try {
+            psmt = conn.prepareStatement("SELECT userId, a.betId, amount, payout, betSuccess, startDate, endDate, odds, type, teamName FROM "+this.database+".userBets as a JOIN ("+this.database+".betStats as b JOIN "+this.database+".teams as t on b.teamId = t.teamId) on a.betId = b.betId;");
+            rs = psmt.executeQuery();
+            String result = "{";
+			while (rs.next())
+			{
+                result+= "\""+rs.getString("betId")+"\": {";
+				result+= "\"UserId\": "+rs.getInt("userId");
+                result+= ",\"amount\": "+rs.getInt("amount");
+                result+= ",\"Payout\": "+rs.getDouble("Payout");
+                result+= ",\"BetSuccess\": "+rs.getString("BetSuccess");
+                result+= ",\"TeamName\": "+rs.getString("teamName");
+				result+= ",\"StartDate\": "+rs.getString("startDate");
+				result+= ",\"EndDate\": "+rs.getString("endDate");
+                result+= ",\"Odds\": "+rs.getDouble("odds");
+                result+= ",\"Type\": "+rs.getString("type");
+				result+=" }, ";
+			}
+            result = result.substring(0, result.length()-2);
+            result +=" }";
+            rs.close();
+			psmt.close();
+            conn.close();
+            
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+			return null; //"/bet Fail";
+        }
+    }
+
+
+
+
 }

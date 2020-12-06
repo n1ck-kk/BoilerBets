@@ -63,7 +63,11 @@ public class betStatController {
         betStatSQL bs = new betStatSQL();
         return bs.sortByTeam();
     }
-
+    @GetMapping("/getUserBets")
+    public String getUserBets() {
+        betStatSQL bs = new betStatSQL();
+        return bs.getUserBets();
+    }
 }
 
 
