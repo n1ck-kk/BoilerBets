@@ -12,7 +12,7 @@ import Button from '@material-ui/core/Button';
 import '../css/Player.css';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import BetAmount from './BetAmount.js';
+import UserBetAmount from './UserBetAmount.js';
 
 
 export default class UserBets extends Component {
@@ -27,7 +27,8 @@ export default class UserBets extends Component {
     }
 
     async handleGetBetStats() {
-        await fetch('http://localhost:8080/userBets/getUserBets' ,{
+        console.log(this.props.location.state.userId);
+        await fetch('http://localhost:8080/userBets/getUserBets?username='+this.props.location.state.username ,{
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
@@ -36,18 +37,12 @@ export default class UserBets extends Component {
         }).then(response => response.text())
             .then(data => {
                 console.log(data);
-                var index = 0;
+                console.log(JSON.parse(data));
+                let t = JSON.parse(data);
+                console.log(Object.values(t));
+                // var index = 0;
                 var i = 0;
-                var tempArr = [];
-                for (; i < data.length - 2; i++) {
-                    //console.log(data.substr(i, 3));
-                    if (data.substr(i, 3) == "}, " || data.substr(i, 3) == "} }") {
-                        i+= 3;
-                        tempArr.push(data.substr(index, i - index));
-                        index = i;
-                    }
-                }
-                this.setState({betStatList: tempArr});
+                this.setState({betStatList: Object.values(JSON.parse(data))});
                 
                 //console.log(this.state.playerList);
             }).catch(console.log("ERR"));
@@ -63,17 +58,18 @@ export default class UserBets extends Component {
         //console.log(this.props.location.state);
         console.log(this.state.betStatList[0]);
         console.log(this.state.betStatList[1]);
-        console.log(this.props.location.state.username);
+        console.log(this.props.location.state);
         return (
             <div className = "container"> {/* Section that displays the navbar */}
                 <Navbar />
-                <div className="scrollBox">
+                {/* <div className="scrollBox"> */}
                     {this.state.betStatList.map((betStatList, index) => {
-                            return(<BetAmount cardInfo={this.state.betStatList[index]} userInfo={this.props.location.state.username}/>)
+                            console.log(this.state.betStatList[index]);
+                            return(<UserBetAmount cardInfo={this.state.betStatList[index]} userInfo={this.props.location.state.username}/>)
                         }
                     )}
                 </div>
-            </div>
+            // </div>
         )
     }
 } 
