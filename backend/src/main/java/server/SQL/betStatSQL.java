@@ -44,6 +44,15 @@ public class betStatSQL {
 				result+=" }, ";
                 x++;
 			}
+            if ( result.equals("{")){
+                System.out.println("NO BETS FOR USER");
+                result = "{}";
+                rs.close();
+                conn.commit();
+                psmt.close();
+                conn.close();
+                return result;
+            }
             result = result.substring(0, result.length()-2);
             result +=" }";
             rs.close();
@@ -76,6 +85,15 @@ public class betStatSQL {
 				result+=" }, ";
                 x++;
 			}
+            if ( result.equals("{")){
+                System.out.println("NO BETS FOR USER");
+                result = "{}";
+                rs.close();
+                conn.commit();
+                psmt.close();
+                conn.close();
+                return result;
+            }
             result = result.substring(0, result.length()-2);
             result +=" }";
             rs.close();
@@ -108,6 +126,15 @@ public class betStatSQL {
 				result+=" }, ";
                 x++;
 			}
+            if ( result.equals("{")){
+                System.out.println("NO BETS FOR USER");
+                result = "{}";
+                rs.close();
+                conn.commit();
+                psmt.close();
+                conn.close();
+                return result;
+            }
             result = result.substring(0, result.length()-2);
             result +=" }";
             rs.close();
@@ -139,6 +166,15 @@ public class betStatSQL {
 				result+=" }, ";
                 x++;
 			}
+            if ( result.equals("{")){
+                System.out.println("NO BETS FOR USER");
+                result = "{}";
+                rs.close();
+                conn.commit();
+                psmt.close();
+                conn.close();
+                return result;
+            }
             result = result.substring(0, result.length()-2);
             result +=" }";
             rs.close();
@@ -170,6 +206,15 @@ public class betStatSQL {
 				result+=" }, ";
                 x++;
 			}
+            if ( result.equals("{")){
+                System.out.println("NO BETS FOR USER");
+                result = "{}";
+                rs.close();
+                conn.commit();
+                psmt.close();
+                conn.close();
+                return result;
+            }
             result = result.substring(0, result.length()-2);
             result +=" }";
             rs.close();
@@ -201,6 +246,15 @@ public class betStatSQL {
 				result+=" }, ";
                 x++;
 			}
+            if ( result.equals("{")){
+                System.out.println("NO BETS FOR USER");
+                result = "{}";
+                rs.close();
+                conn.commit();
+                psmt.close();
+                conn.close();
+                return result;
+            }
             result = result.substring(0, result.length()-2);
             result +=" }";
             rs.close();
@@ -232,6 +286,15 @@ public class betStatSQL {
 				result+=" }, ";
                 x++;
 			}
+            if ( result.equals("{")){
+                System.out.println("NO BETS FOR USER");
+                result = "{}";
+                rs.close();
+                conn.commit();
+                psmt.close();
+                conn.close();
+                return result;
+            }
             result = result.substring(0, result.length()-2);
             result +=" }";
             rs.close();
@@ -263,6 +326,15 @@ public class betStatSQL {
 				result+=" }, ";
                 x++;
 			}
+            if ( result.equals("{")){
+                System.out.println("NO BETS FOR USER");
+                result = "{}";
+                rs.close();
+                conn.commit();
+                psmt.close();
+                conn.close();
+                return result;
+            }
             result = result.substring(0, result.length()-2);
             result +=" }";
             rs.close();
@@ -304,6 +376,15 @@ public class betStatSQL {
 				result+=" }, ";
                 x++;
 			}
+            if ( result.equals("{")){
+                System.out.println("NO BETS FOR USER");
+                result = "{}";
+                rs.close();
+                conn.commit();
+                psmt.close();
+                conn.close();
+                return result;
+            }
             result = result.substring(0, result.length()-2);
             result +=" }";
 
