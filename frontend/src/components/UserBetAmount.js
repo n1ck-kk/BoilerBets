@@ -99,7 +99,16 @@ export default class UserBetAmount extends React.Component{
                     <Card textAlign='center' horizontalAlign='middle' verticalAlign='middle' style={{width: "30vw"}} >
                         <CardContent>
                             {/* <div className="middle aligned"> */}
-                               <Header> {this.props.cardInfo['username']} </Header>
+                            <Header> {this.props.cardInfo['TeamName']}: {this.props.cardInfo['Type']} </Header>
+                            
+                            Date Bet Submitted: {this.props.cardInfo['StartDate']} - End Date: {this.props.cardInfo['EndDate']} <br/>
+                            Odds: {this.props.cardInfo['Odds']}<br/>
+                            Bet Amount: ${parseFloat(this.props.cardInfo['amount']).toFixed(2)} - To Win: ${parseFloat(this.props.cardInfo['Payout']).toFixed(2)} <br/>
+                            <br/>
+                            Bet Status: {this.props.cardInfo['BetSuccess']}
+
+
+
                             {/* </div> */}
                         </CardContent>
                     </Card>

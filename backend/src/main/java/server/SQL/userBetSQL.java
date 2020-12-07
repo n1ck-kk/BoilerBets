@@ -81,7 +81,7 @@ public class userBetSQL {
 				conn.rollback();
 				psmtCheck.close();
 				conn.close();
-				return "ERROR INSERTING USERBET. BLOCKED BY TRANSACTION";
+				return "BLOCKED";
 			}
 			
 
