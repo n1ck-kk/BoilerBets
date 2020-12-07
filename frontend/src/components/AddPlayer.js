@@ -74,6 +74,7 @@ class AddPlayer extends Component {
                     loggedIn: true
                 }
             });
+            window.location.replace(window.location.href);
         }).catch(console.log)
     }
 

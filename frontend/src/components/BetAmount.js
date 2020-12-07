@@ -117,6 +117,7 @@ export default class BetAmount extends React.Component{
                 amount: 0,
                 badMessage: tempMsg
             });
+            //window.location.replace('http://localhost:3000/UserBets');
         }).catch(console.log)
     }
 
