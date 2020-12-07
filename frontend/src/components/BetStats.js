@@ -263,6 +263,13 @@ export default class BetStats extends Component {
                 <Navbar />
                 <Grid style={{width: '100vw', height: '90vh'}} columns={2}>
                     <Grid.Column style={{width: '35vw', height: '80vh'}}> {/* Grid colummn for bet list */}
+                            <Modal 
+                                trigger={<Button style={{width: '39.3vw'}} stacked verticalAlign='left' textAlign='center' color='blue'>Filter</Button>}
+                                header={'Filter Available Bets'}
+                                content={<Dropdown placeholder='Select Filter' fluid search selection options={searchOptions} onChange={(e, key) => this.handleFilter(e, key)}/>}
+                                actions={['Close']}
+                                
+                            />
                         <div className="scrollBox" style={{width: '40vw'}}>
                             {this.state.betStatList.map((betStatList, index) => {
                                     console.log(this.state.betStatList[index]);
@@ -270,18 +277,6 @@ export default class BetStats extends Component {
                                 }
                             )}
                         </div>
-                    </Grid.Column>
-
-                    <Grid.Column textAlign='center' verticalAlign='middle' horizontalAlign='middle' style={{width: '35vw', height: '80vh'}}> {/* Grid colummn for filter list */}
-                        <Modal 
-                                trigger={<Button style={{width: '20vw'}} stacked verticalAlign='left' textAlign='center' color='blue'>Filter</Button>}
-                                header={'Filter Available Bets'}
-                                content={
-                                        <div>
-                                            <Dropdown placeholder='Select Filter' fluid search selection options={searchOptions} onChange={(e, key) => this.handleFilter(e, key)}/>
-                                        </div>}
-                                actions={['Close']}
-                            />
                     </Grid.Column>
                 </Grid>
             </div>
