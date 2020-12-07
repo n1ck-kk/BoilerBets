@@ -29,6 +29,7 @@ class Navbar extends Component {
     this.handleTeamStatsPage = this.handleTeamStatsPage.bind(this);
     this.handlePlayersPage = this.handlePlayersPage.bind(this);
     this.handleAvailableBetsPage = this.handleAvailableBetsPage.bind(this);
+    this.handleUserBetsPage = this.handleUserBetsPage.bind(this);
     this.state = {
       username: this.props.location.state.username,
       loggedIn: this.props.location.state.loggedIn
@@ -81,6 +82,17 @@ class Navbar extends Component {
   });
   }
 
+  handleUserBetsPage() {
+    this.props.history.push({
+      pathname: '/UserBets',
+      state: {
+          username: this.state.username,
+          userId: this.state.userId,
+          loggedIn: this.state.loggedIn
+      }
+  });
+  }
+
   render() {
     const { classes } = this.props;
     return (
@@ -95,6 +107,7 @@ class Navbar extends Component {
                 <Button color="inherit" onClick={this.handlePlayersPage}>Players</Button>
                 <Button color="inherit" onClick={this.handleTeamStatsPage}>Teams</Button>
                 <Button color="inherit" onClick={this.handleAvailableBetsPage}>Available Bets</Button>
+                <Button color="inherit" onClick={this.handleUserBetsPage}>Your Bets</Button>
                 <Button color="inherit" onClick={this.handleSignOut}>Sign Out</Button>
             </Toolbar>
             </AppBar>

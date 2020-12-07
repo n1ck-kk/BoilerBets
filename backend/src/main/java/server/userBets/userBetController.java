@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import server.SQL.userBetSQL;
+import server.SQL.betStatSQL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -33,5 +34,11 @@ public class userBetController {
 
         userBetSQL ub = new userBetSQL();
         return ub.insertBet(u);
+    }
+
+    @GetMapping("/getUserBets")
+    public String getUserBets() {
+        betStatSQL bs = new betStatSQL();
+        return bs.getUserBets();
     }
 }

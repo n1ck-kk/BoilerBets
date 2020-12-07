@@ -4,8 +4,11 @@ import Navbar from './Navbar.js';
 import '../css/SignIn.css';
 import PlayerCard from './PlayerCard';
 import '../css/TeamStats.css';
-import {Grid, Button} from 'semantic-ui-react';
+import {Grid, Button, Modal} from 'semantic-ui-react';
 import '../css/Player.css';
+import AddPlayer from './AddPlayer.js';
+// import { Modal } from '@material-ui/core';
+import { Add } from '@material-ui/icons';
 
 
 export default class Players extends Component {
@@ -14,6 +17,7 @@ export default class Players extends Component {
         super(props);
         this.state = {
             playerList: [],
+            playerId: '',
             playerName: 'Select A Player',
             teamName: '',
             position: '',
@@ -22,6 +26,7 @@ export default class Players extends Component {
         this.handleGetPlayers = this.handleGetPlayers.bind(this);
         this.handlePlayerClicked = this.handlePlayerClicked.bind(this);
         this.handleGetPlayerInfo = this.handleGetPlayerInfo.bind(this);
+        this.handleAddPlayer = this.handleAddPlayer.bind(this);
     }
 
     /* Once we have user bets, use map() to put them into a materialize table or somethin */
@@ -48,27 +53,37 @@ export default class Players extends Component {
                                 {this.state.playerList.map((playerList, index) => {
                                     console.log(playerList);
                                     console.log(this.state.playerList[index]);
-                                    return( <Button style={{width: '20vw'}} horizontalAlign='middle' onClick={() => {this.handlePlayerClicked(this.state.playerList[index]);}}>
-                                                {this.state.playerList[index]}
+                                    return( <Button style={{width: '20vw'}} horizontalAlign='middle' onClick={() => {this.handlePlayerClicked(this.state.playerList[index].id);}}>
+                                                {this.state.playerList[index].playerName}
                                             </Button>)
                                     }
                                 )}
                             </div>
                     </Grid.Column>
 
-                    <Grid.Column style={{width: '50vw', height: '80vh'}} verticalAlign='middle' textAlgin='middle'> {/* Grid colummn for player stats once a player is clicked */}
+                    <Grid.Column style={{width: '33vw', height: '80vh'}} verticalAlign='middle' textAlgin='middle'> {/* Grid colummn for player stats once a player is clicked */}
                         {playerCardValue}
+                        <Modal 
+                            trigger={<Button color='blue'>Add Player</Button>}
+                            header={'Add Player'}
+                            content={<AddPlayer/>}
+                            actions={['Close']}
+                        />
                     </Grid.Column>
                 </Grid>
             </div>
         )
     }
 
+    async handleAddPlayer(){
+
+    }
+
     /* Get player info from playerStats and render in popup */
-    async handleGetPlayerInfo (playerName) {
+    async handleGetPlayerInfo (playerId) {
         console.log("HEREEEEEEEEE");
-        console.log(this.state.playerName)
-        console.log(playerName);
+        console.log(this.state.playerId)
+        console.log(playerId);
         
         await fetch('http://localhost:8080/player/getPlayerStats', {
             method: 'POST',
@@ -77,19 +92,19 @@ export default class Players extends Component {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                playerId: parseInt(playerName) + 1
+                playerId: parseInt(playerId)
             })
         }).then(res => res.text()).then((data) => {
             console.log(data);
             console.log(JSON.parse(data));
             console.log(JSON.parse(data).teamName);
-            console.log(JSON.parse(data).playerName);
+            console.log(JSON.parse(data).playerId);
             console.log(JSON.parse(data).playerStats);
             // console.log(JSON.parse(JSON.parse(data).playerStats));
             console.log(Object.keys(JSON.parse(data).playerStats));
             console.log(Object.values(JSON.parse(data).playerStats));
-            console.log(Object.keys(JSON.parse(data).playerStats)[0]);
-            console.log(Object.values(JSON.parse(data).playerStats)[0]);
+            //console.log(Object.keys(JSON.parse(data).playerStats)[0]);
+            //console.log(Object.values(JSON.parse(data).playerStats)[0]);
             var temp = JSON.parse(data).playerStats.replace(/'/g,'"');
             console.log(JSON.parse(temp));
             console.log("KEYS: ");
@@ -101,6 +116,7 @@ export default class Players extends Component {
 
             this.setState({
                 teamName: JSON.parse(data).teamName,
+                playerId: JSON.parse(data).playerId,
                 playerName: JSON.parse(data).playerName,
                 position: JSON.parse(data).position,
                 playerInfo: JSON.parse(JSON.parse(data).playerStats.replace(/'/g,'"')),
@@ -120,7 +136,8 @@ export default class Players extends Component {
         }).then(response => response.json())
             .then(data => {
                 console.log(data);
-                this.setState({playerList: Object.keys(data)});
+                console.log(Object.values(data));
+                this.setState({playerList: data});
                 //console.log(this.state.playerList);
             }).catch(console.log("ERR")); // here's how u set variables u want to use later
     }
@@ -130,9 +147,9 @@ export default class Players extends Component {
         this.handleGetPlayers();
     }
 
-    async handlePlayerClicked(playerName) {
-        this.handleGetPlayerInfo(playerName);
-        this.setState({playerName: playerName})
+    async handlePlayerClicked(playerId) {
+        this.handleGetPlayerInfo(playerId);
+        this.setState({playerId: playerId})
     }
     
 } 
