@@ -96,11 +96,11 @@ export default class UserBetAmount extends React.Component{
         return(
            <div>
                {/* <Button onClick = {this.handleClick} top-margin = "0px"> */}
-                    <Card style={{width: "500px"}} >
+                    <Card textAlign='center' horizontalAlign='middle' verticalAlign='middle' style={{width: "30vw"}} >
                         <CardContent>
-                            <div className="left aligned">
+                            {/* <div className="middle aligned"> */}
                                <Header> {this.props.cardInfo['username']} </Header>
-                            </div>
+                            {/* </div> */}
                         </CardContent>
                     </Card>
                {/* </Button> */}
