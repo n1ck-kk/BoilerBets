@@ -37,8 +37,9 @@ public class userBetController {
     }
 
     @GetMapping("/getUserBets")
-    public String getUserBets() {
+    public String getUserBets(@RequestParam(name="username") String username) {
         betStatSQL bs = new betStatSQL();
-        return bs.getUserBets();
+        //bs.username = username;
+        return bs.getUserBets(username);
     }
 }

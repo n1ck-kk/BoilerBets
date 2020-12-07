@@ -1,7 +1,5 @@
 import React from "react";
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
+import {Grid, Button, Modal, Card, CardContent, Header} from 'semantic-ui-react';
 import '../css/CustomPopup.css'; 
 import '../css/SignIn.css';
 
@@ -91,14 +89,14 @@ export default class BetAmount extends React.Component{
     }
 
     render() {
-
+        console.log(this.props.cardInfo['Type']);
         return(
            <div>
                <Button onClick = {this.handleClick} top-margin = "0px">
                     <Card style={{width: "500px"}} >
                         <CardContent>
                             <div className="left aligned">
-                                {this.props.cardInfo}
+                                <Header> {this.props.cardInfo['Type']} </Header>
                             </div>
                         </CardContent>
                     </Card>

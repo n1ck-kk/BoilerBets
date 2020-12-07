@@ -36,18 +36,12 @@ export default class BetStats extends Component {
         }).then(response => response.text())
             .then(data => {
                 console.log(data);
-                var index = 0;
+                console.log(JSON.parse(data));
+                let t = JSON.parse(data);
+                console.log(Object.values(t));
+                // var index = 0;
                 var i = 0;
-                var tempArr = [];
-                for (; i < data.length - 2; i++) {
-                    //console.log(data.substr(i, 3));
-                    if (data.substr(i, 3) == "}, " || data.substr(i, 3) == "} }") {
-                        i+= 3;
-                        tempArr.push(data.substr(index, i - index));
-                        index = i;
-                    }
-                }
-                this.setState({betStatList: tempArr});
+                this.setState({betStatList: Object.values(JSON.parse(data))});
                 
                 //console.log(this.state.playerList);
             }).catch(console.log("ERR"));
@@ -69,6 +63,7 @@ export default class BetStats extends Component {
                 <Navbar />
                 <div className="scrollBox">
                     {this.state.betStatList.map((betStatList, index) => {
+                            console.log(this.state.betStatList[index]);
                             return(<BetAmount cardInfo={this.state.betStatList[index]} userInfo={this.props.location.state.username}/>)
                         }
                     )}
