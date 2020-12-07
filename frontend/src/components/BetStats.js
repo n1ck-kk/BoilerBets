@@ -1,17 +1,10 @@
 import React, {Component} from 'react';
-import { withRouter } from 'react-router-dom';
-import axios from 'axios';
-import 'materialize-css';
 import Navbar from './Navbar.js';
-import { makeStyles } from '@material-ui/styles';
+import 'materialize-css';
 import '../css/SignIn.css';
-import { Grid } from '@material-ui/core';
-import PlayerCard from './PlayerCard.js';
 import '../css/TeamStats.css';
-import Button from '@material-ui/core/Button';
 import '../css/Player.css';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
+import {Grid} from 'semantic-ui-react';
 import BetAmount from './BetAmount.js';
 
 
@@ -61,13 +54,17 @@ export default class BetStats extends Component {
         return (
             <div className = "container"> {/* Section that displays the navbar */}
                 <Navbar />
-                <div className="scrollBox">
-                    {this.state.betStatList.map((betStatList, index) => {
-                            console.log(this.state.betStatList[index]);
-                            return(<BetAmount cardInfo={this.state.betStatList[index]} userInfo={this.props.location.state.username}/>)
-                        }
-                    )}
-                </div>
+                <Grid style={{width: '100vw', height: '90vh'}} columns={2}>
+                    <Grid.Column style={{width: '35vw', height: '80vh'}}> {/* Grid colummn for player list */}
+                        <div className="scrollBox" style={{width: '40vw'}}>
+                            {this.state.betStatList.map((betStatList, index) => {
+                                    console.log(this.state.betStatList[index]);
+                                    return(<BetAmount cardInfo={this.state.betStatList[index]} userInfo={this.props.location.state.username}/>)
+                                }
+                            )}
+                        </div>
+                    </Grid.Column>
+                </Grid>
             </div>
         )
     }
