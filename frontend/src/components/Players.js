@@ -41,15 +41,15 @@ export default class Players extends Component {
         else {
             console.log(this.state.playerInfo);
             playerCardValue = 
-            <PlayerCard teamName={this.state.teamName} playerName={this.state.playerName} position={this.state.position} keys={this.state.keys} values={this.state.values} />
+            <PlayerCard style={{width: '35vw'}} stacked teamName={this.state.teamName} playerName={this.state.playerName} position={this.state.position} keys={this.state.keys} values={this.state.values} />
         }
 
         return (
             <div className = "container"> {/* Section that displays the navbar */}
                 <Navbar />
                 <Grid style={{width: '100vw', height: '90vh'}} columns={2}>
-                    <Grid.Column style={{width: '50vw', height: '80vh'}}> {/* Grid colummn for player list */}
-                            <div className="scrollBox">
+                    <Grid.Column style={{width: '35vw', height: '80vh'}}> {/* Grid colummn for player list */}
+                            <div className="scrollbox">
                                 {this.state.playerList.map((playerList, index) => {
                                     console.log(playerList);
                                     console.log(this.state.playerList[index]);
@@ -61,10 +61,10 @@ export default class Players extends Component {
                             </div>
                     </Grid.Column>
 
-                    <Grid.Column style={{width: '33vw', height: '80vh'}} verticalAlign='middle' textAlgin='middle'> {/* Grid colummn for player stats once a player is clicked */}
+                    <Grid.Column style={{width: '35vw', height: '80vh'}} verticalAlign='middle' textAlign='center'> {/* Grid colummn for player stats once a player is clicked */}
                         {playerCardValue}
                         <Modal 
-                            trigger={<Button color='blue'>Add Player</Button>}
+                            trigger={<Button style={{width: '35vw'}} stacked verticalAlign='left' textAlign='center' color='blue'>Add Player</Button>}
                             header={'Add Player'}
                             content={<AddPlayer/>}
                             actions={['Close']}
@@ -96,20 +96,20 @@ export default class Players extends Component {
             })
         }).then(res => res.text()).then((data) => {
             console.log(data);
-            console.log(JSON.parse(data));
-            console.log(JSON.parse(data).teamName);
-            console.log(JSON.parse(data).playerId);
-            console.log(JSON.parse(data).playerStats);
+            // console.log(JSON.parse(data));
+            // console.log(JSON.parse(data).teamName);
+            // console.log(JSON.parse(data).playerId);
+            // console.log(JSON.parse(data).playerStats);
             // console.log(JSON.parse(JSON.parse(data).playerStats));
-            console.log(Object.keys(JSON.parse(data).playerStats));
-            console.log(Object.values(JSON.parse(data).playerStats));
+            // console.log(Object.keys(JSON.parse(data).playerStats));
+            // console.log(Object.values(JSON.parse(data).playerStats));
             //console.log(Object.keys(JSON.parse(data).playerStats)[0]);
             //console.log(Object.values(JSON.parse(data).playerStats)[0]);
             var temp = JSON.parse(data).playerStats.replace(/'/g,'"');
-            console.log(JSON.parse(temp));
-            console.log("KEYS: ");
-            console.log(Object.keys(JSON.parse(JSON.parse(data).playerStats.replace(/'/g,'"'))));
-            console.log(Object.values(JSON.parse(JSON.parse(data).playerStats.replace(/'/g,'"'))));
+            // console.log(JSON.parse(temp));
+            // console.log("KEYS: ");
+            // console.log(Object.keys(JSON.parse(JSON.parse(data).playerStats.replace(/'/g,'"'))));
+            // console.log(Object.values(JSON.parse(JSON.parse(data).playerStats.replace(/'/g,'"'))));
 
 
 

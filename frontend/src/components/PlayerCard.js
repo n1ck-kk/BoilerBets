@@ -2,11 +2,6 @@ import React from "react";
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import {Header} from 'semantic-ui-react';
-import Button from '@material-ui/core/Button';
-import CustomPopup from './CustomPopup';
-import { config } from '../config/config.js';
-import {Link} from "react-router-dom";
-
 
 export default class PlayerCard extends React.Component{
 
@@ -18,7 +13,7 @@ export default class PlayerCard extends React.Component{
     console.log('IN Player Card');
     
         if (this.props.playerName === 'Select A Player' || this.props.values === undefined) { //Only is displayed if a team has not been chosen yet
-            return(<Card style={{width: '30vw'}} verticalAlign='middle' centered>
+            return(<Card style={{width: '35vw'}} verticalAlign='middle' centered>
                         <CardContent color='grey'>
                             <Header>{this.props.playerName}</Header>
                         </CardContent>
@@ -31,7 +26,7 @@ export default class PlayerCard extends React.Component{
 
             return(
                 <div>
-                    <Card style={{width: "30vw"}} centered >
+                    <Card style={{width: '35vw'}} verticalAlign='middle' centered>
                         <CardContent>
                             <Header>{this.props.playerName}: {this.props.teamName}</Header>
                                 Position: {this.props.position} <br/>
