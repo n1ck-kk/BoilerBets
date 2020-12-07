@@ -100,16 +100,16 @@ public class PlayerStatsSQL {
 			//ObjectMapper om = new ObjectMapper();
 			//System.out.println("OM: "+om.writeValueAsString(rs));
 			while(rs.next()){
-				playerStats+="{ \"player_id\": "+rs.getInt("playerId")+",";
-				playerStats+=" \"avgP\": "+rs.getDouble("avgP")+",";
-				playerStats+=" \"avgAST\": "+rs.getDouble("avgAST")+",";
-				playerStats+=" \"avgBLK\": "+rs.getDouble("avgBLK")+",";
-				playerStats+=" \"avgSTL\": "+rs.getDouble("avgSTL")+",";
-				playerStats+=" \"avgTO\": "+rs.getDouble("avgTO")+",";
-				playerStats+=" \"avgMin\": "+rs.getDouble("avgMin")+",";
-				playerStats+=" \"avgFG\": "+rs.getDouble("avgFG")+",";
-				playerStats+=" \"avgFG3\": "+rs.getDouble("avgFG3")+",";
-				playerStats+=" \"avgFT\": "+rs.getDouble("avgFT")+" }";
+				playerStats+="{ 'player_id': "+rs.getInt("playerId")+",";
+				playerStats+=" 'avgP': "+rs.getDouble("avgP")+",";
+				playerStats+=" 'avgAST': "+rs.getDouble("avgAST")+",";
+				playerStats+=" 'avgBLK': "+rs.getDouble("avgBLK")+",";
+				playerStats+=" 'avgSTL': "+rs.getDouble("avgSTL")+",";
+				playerStats+=" 'avgTO': "+rs.getDouble("avgTO")+",";
+				playerStats+=" 'avgMin': "+rs.getDouble("avgMin")+",";
+				playerStats+=" 'avgFG': "+rs.getDouble("avgFG")+",";
+				playerStats+=" 'avgFG3': "+rs.getDouble("avgFG3")+",";
+				playerStats+=" 'avgFT': "+rs.getDouble("avgFT")+" }";
 			}
 			System.out.println("JSON: "+playerStats);
 			rs.close();

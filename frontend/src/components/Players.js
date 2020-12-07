@@ -15,6 +15,9 @@ export default class Players extends Component {
         this.state = {
             playerList: [],
             playerName: 'Select A Player',
+            teamName: '',
+            position: '',
+            playerNumber: '' //NEEDS TO BE ADDED... I AM NOT GETTING IT IN THE DATA RETURNED TO FRONT END
         };
         this.handleGetPlayers = this.handleGetPlayers.bind(this);
         this.handlePlayerClicked = this.handlePlayerClicked.bind(this);
@@ -31,8 +34,9 @@ export default class Players extends Component {
             <PlayerCard playerName={this.state.playerName}/>
         }
         else {
+            console.log(this.state.playerInfo);
             playerCardValue = 
-            <PlayerCard teamName={this.state.playerInfo.teamName} playerName={this.state.playerStats.playerName} info={JSON.parse(this.state.playerInfo.playerStats)} />
+            <PlayerCard teamName={this.state.teamName} playerName={this.state.playerName} position={this.state.position} keys={this.state.keys} values={this.state.values} />
         }
 
         return (
@@ -81,16 +85,27 @@ export default class Players extends Component {
             console.log(JSON.parse(data).teamName);
             console.log(JSON.parse(data).playerName);
             console.log(JSON.parse(data).playerStats);
-            console.log(JSON.stringify(JSON.parse(data).playerStats));
+            // console.log(JSON.parse(JSON.parse(data).playerStats));
             console.log(Object.keys(JSON.parse(data).playerStats));
             console.log(Object.values(JSON.parse(data).playerStats));
             console.log(Object.keys(JSON.parse(data).playerStats)[0]);
             console.log(Object.values(JSON.parse(data).playerStats)[0]);
+            var temp = JSON.parse(data).playerStats.replace(/'/g,'"');
+            console.log(JSON.parse(temp));
+            console.log("KEYS: ");
+            console.log(Object.keys(JSON.parse(JSON.parse(data).playerStats.replace(/'/g,'"'))));
+            console.log(Object.values(JSON.parse(JSON.parse(data).playerStats.replace(/'/g,'"'))));
+
 
 
 
             this.setState({
-                playerInfo: JSON.parse(data),
+                teamName: JSON.parse(data).teamName,
+                playerName: JSON.parse(data).playerName,
+                position: JSON.parse(data).position,
+                playerInfo: JSON.parse(JSON.parse(data).playerStats.replace(/'/g,'"')),
+                keys: Object.keys(JSON.parse(JSON.parse(data).playerStats.replace(/'/g,'"'))),
+                values: Object.values(JSON.parse(JSON.parse(data).playerStats.replace(/'/g,'"')))
             })
         }).catch(console.log)
     }
