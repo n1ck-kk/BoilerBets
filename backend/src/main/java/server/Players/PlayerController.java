@@ -146,7 +146,7 @@ public class PlayerController {
 
 			rs.close();
 			psmt.close();
-			conn.close();
+			//conn.close();
 
 		} catch (Exception e) {
 			//return "ERR";
@@ -158,7 +158,7 @@ public class PlayerController {
 	}
 
 	@PostMapping("/updatePlayer")
-	public String updatePlayer(@RequestParam(name="playerId") String player_id, @RequestParam String playerInfo) throws JsonParseException, JsonMappingException, IOException {
+	public String updatePlayer(@RequestParam(name="playerId") String player_id, @RequestBody String playerInfo) throws JsonParseException, JsonMappingException, IOException {
 		System.out.println(player_id);
 		System.out.println(playerInfo);
 
@@ -186,7 +186,7 @@ public class PlayerController {
 
 			//rs.close();
 			psmt.close();
-			conn.close();
+			//conn.close();
 
 		} catch (Exception e) {
 			//return "ERR";

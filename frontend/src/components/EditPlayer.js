@@ -145,26 +145,7 @@ class EditPlayer extends Component {
                 <div className = "centered">
                     <div className="col s6">
                         <form onSubmit={this.handelSubmit}>
-                            <div className="input-field col s12">
-                                <Person />
-                                <input type="number" min = "1" max = "30" id="team_id" placeholder="Team ID" onChange = {this.handleChange} />
-                            </div>
-                            <div className="input-field col s12">
-                                <Book />
-                                <input type="text" id="position" placeholder="Position" onChange = {this.handleChange} />
-                            </div>
-                            <div className="input-field col s12">
-                                <Email />
-                                <input type="text" id="college_name" placeholder="College Name" onChange = {this.handleChange} />
-                            </div>
-                            <div className="input-field col s12">
-                                <PersonOutline />
-                                <input type="text" id="player_name" placeholder="Player Name" onChange = {this.handleChange} />
-                            </div>
-                            <div className="input-field col s12">
-                                <PersonOutline />
-                                <input type="text" id="player_number" placeholder="Player Number" onChange = {this.handleChange} />
-                            </div>
+                            
                             <div className="input-field col s12">
                                 <PersonOutline />
                                 <input type="number" id="avgP" placeholder="Average Points" onChange = {this.handleChange} />
