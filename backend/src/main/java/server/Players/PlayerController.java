@@ -25,7 +25,7 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import org.springframework.context.annotation.Bean;
 import java.sql.*;
 import server.SQL.PlayerStatsSQL;
-import server.PlayerStats.PlayerStats;
+import server.PlayerStats.*;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
@@ -157,7 +157,7 @@ public class PlayerController {
 	}
 
 	@PostMapping("/updatePlayer")
-	public String updatePlayer(@RequestParam(name="playerId") String player_id, @RequestParam String playerInfo) {
+	public String updatePlayer(@RequestParam(name="playerId") String player_id, @RequestParam String playerInfo) throws JsonParseException, JsonMappingException, IOException {
 		System.out.println(player_id);
 		System.out.println(playerInfo);
 
@@ -191,5 +191,7 @@ public class PlayerController {
 			//return "ERR";
 			e.printStackTrace();
 		}
+
+		return "OK";
 	}
 }
