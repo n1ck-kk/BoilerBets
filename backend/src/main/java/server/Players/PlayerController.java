@@ -81,6 +81,10 @@ public class PlayerController {
                 result += rs.getString("teamName");
 			}
 			System.out.println(result);
+
+			rs.close();
+			psmt.close();
+            conn.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -123,5 +127,30 @@ public class PlayerController {
 
 		System.out.println("returning null");
 		return null;
+	}
+
+
+	@PostMapping("/deletePlayer")
+	public String deletePlayer(@RequestParam(name="playerId") String player_id) {
+		System.out.println(player_id);
+
+		Player removePlayer = new Player();
+		removePlayer.setId(Long.parseLong(player_id));
+		playerRepository.delete(removePlayer);
+
+		try {
+			psmt = conn.prepareStatement("delete from playerStats where playerId = ?");
+			psmt.setString(1, player_id);
+			rs = psmt.executeQuery();
+		} catch (Exception e) {
+			return "ERR";
+			e.printStackTrace();
+		}
+
+		
+		rs.close();
+		psmt.close();
+		conn.close();
+		return "OK";
 	}
 }

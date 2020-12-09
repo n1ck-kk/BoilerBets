@@ -60,6 +60,10 @@ public class Player {
         return this.playerId;
     }
 
+    public void setId(long id) {
+        this.playerId = id;
+    }
+
     public long getTeamId() {
         return this.teamId;
     }
