@@ -25,6 +25,7 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import org.springframework.context.annotation.Bean;
 import java.sql.*;
 import server.SQL.PlayerStatsSQL;
+import server.PlayerStats.PlayerStats;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
@@ -139,18 +140,56 @@ public class PlayerController {
 		playerRepository.delete(removePlayer);
 
 		try {
-			psmt = conn.prepareStatement("delete from playerStats where playerId = ?");
+			psmt = conn.prepareStatement("delete from "+ this.database +".playerStats where playerId = ?");
 			psmt.setString(1, player_id);
 			rs = psmt.executeQuery();
+
+			rs.close();
+			psmt.close();
+			conn.close();
+
 		} catch (Exception e) {
-			return "ERR";
+			//return "ERR";
 			e.printStackTrace();
 		}
 
-		
-		rs.close();
-		psmt.close();
-		conn.close();
 		return "OK";
+	}
+
+	@PostMapping("/updatePlayer")
+	public String updatePlayer(@RequestParam(name="playerId") String player_id, @RequestParam String playerInfo) {
+		System.out.println(player_id);
+		System.out.println(playerInfo);
+
+		ObjectMapper om = new ObjectMapper();
+		SimpleModule sm = new SimpleModule("PlayerStatsDeserializer", new Version(1, 0, 0, null, null, null));
+		sm.addDeserializer(PlayerStats.class, new PlayerStatsDeserializer());
+		om.registerModule(sm);
+
+		PlayerStats newPlayer = om.readValue(playerInfo, PlayerStats.class);
+		newPlayer.setID(Long.parseLong(player_id));
+		
+		try {
+			psmt = conn.prepareStatement("update " + this.database + ".playerStats set avgP = ?, avgAST = ?, avgBLK = ?, avgSTL = ?, avgTO = ?, avgMin = ?, avgFG = ?, avgFG3 = ?, avgFT = ? where playerId = ?");
+			psmt.setDouble(1, newPlayer.getAvgP());
+			psmt.setDouble(2, newPlayer.getAvgAST());
+			psmt.setDouble(3, newPlayer.getAvgBLK());
+			psmt.setDouble(4, newPlayer.getAvgSTL());
+			psmt.setDouble(5, newPlayer.getAvgTO());
+			psmt.setDouble(6, newPlayer.getAvgMin());
+			psmt.setDouble(7, newPlayer.getAvgFG());
+			psmt.setDouble(8, newPlayer.getAvgFG3());
+			psmt.setDouble(9, newPlayer.getAvgFT());
+			psmt.setLong(10, Long.parseLong(player_id));
+			psmt.executeUpdate();
+
+			//rs.close();
+			psmt.close();
+			conn.close();
+
+		} catch (Exception e) {
+			//return "ERR";
+			e.printStackTrace();
+		}
 	}
 }
