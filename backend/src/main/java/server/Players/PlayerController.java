@@ -139,18 +139,18 @@ public class PlayerController {
 		playerRepository.delete(removePlayer);
 
 		try {
-			psmt = conn.prepareStatement("delete from playerStats where playerId = ?");
+			psmt = conn.prepareStatement("delete from "+this.database+".playerStats where playerId = ?");
 			psmt.setString(1, player_id);
-			rs = psmt.executeQuery();
-		} catch (Exception e) {
-			return "ERR";
-			e.printStackTrace();
-		}
-
+			psmt.executeUpdate();
 		
-		rs.close();
-		psmt.close();
-		conn.close();
-		return "OK";
+		
+			//rs.close();
+			psmt.close();
+			conn.close();
+			return "OK";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "ERR";
+		}
 	}
 }
