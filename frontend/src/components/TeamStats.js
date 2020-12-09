@@ -35,7 +35,7 @@ export default class TeamStats extends Component {
             <div className = "container"> {/* Section that displays the navbar */}
                 <Navbar />
                 <Grid style={{width: '100vw', height: '90vh'}} columns={2}>
-                    <Grid.Column style={{width: '50vw', height: '80vh'}}> {/* Grid colummn for team list */}
+                    <Grid.Column style={{width: '35vw', height: '80vh'}}> {/* Grid colummn for team list */}
                             <div className="scrollBox">
                                 {this.state.teamList.map((teamList, index) => {
                                     console.log(teamList[index]);
