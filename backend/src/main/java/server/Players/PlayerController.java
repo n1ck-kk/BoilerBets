@@ -142,9 +142,9 @@ public class PlayerController {
 		try {
 			psmt = conn.prepareStatement("delete from "+ this.database +".playerStats where playerId = ?");
 			psmt.setString(1, player_id);
-			rs = psmt.executeQuery();
+			psmt.executeUpdate();
 
-			rs.close();
+			//rs.close();
 			psmt.close();
 			//conn.close();
 
